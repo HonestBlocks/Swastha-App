@@ -1,0 +1,134 @@
+---
+Profiles:
+
+    swastha_network:
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *material_vendor
+                    - *manufacture
+                    - *distributor
+                    - *retailer
+                    - *regulator
+    commonchannel:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *material_vendor
+                - *manufacture
+                - *distributor
+                - *retailer
+                - *regulator
+    org12:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *material_vendor
+                - *manufacture
+    org23:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *manufacture
+                - *distributor
+    org34:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *distributor
+                - *retailer
+    org1only:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *material_vendor
+    org2only:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *manufacture
+    org3only:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *distributor
+    org4only:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *retailer
+Organizations:
+
+    - &OrdererOrg
+        Name: OrdererOrg
+        ID: OrdererMSP
+        MSPDir: ../crypto-config/ordererOrganizations/in.swastha.com/msp
+
+    - &material_vendor
+        Name: vendorMSP
+        ID: vendorMSP
+        MSPDir: ../crypto-config/peerOrganizations/vendor.in.swastha.com/msp
+        AnchorPeers:
+            - Host: peer0.vendor.in.swastha.com
+              Port: 7051
+    - &manufacture
+        Name: manufactureMSP
+        ID: manufactureMSP
+        MSPDir: ../crypto-config/peerOrganizations/manufacture.in.swastha.com/msp
+        AnchorPeers:
+            - Host: peer0.manufacture.in.swastha.com
+              Port: 7051
+    - &distributor
+        Name: distributorMSP
+        ID: distributorMSP
+        MSPDir: ../crypto-config/peerOrganizations/distributor.in.swastha.com/msp
+        AnchorPeers:
+            - Host: peer0.distributor.in.swastha.com
+              Port: 7051
+    - &retailer
+        Name: retailerMSP
+        ID: retailerMSP
+        MSPDir: ../crypto-config/peerOrganizations/retailer.in.swastha.com/msp
+        AnchorPeers:
+            - Host: peer0.retailer.in.swastha.com
+              Port: 7051
+    - &regulator
+        Name: regulatorMSP
+        ID: regulatorMSP
+        MSPDir: ../crypto-config/peerOrganizations/regulator.in.swastha.com/msp
+        AnchorPeers:
+            - Host: peer0.regulator.in.swastha.com
+              Port: 7051
+Orderer: &OrdererDefaults
+
+    OrdererType: kafka
+    Addresses:
+        - orderer0.in.swastha.com:7050
+        - orderer1.in.swastha.com:7050
+        - orderer2.in.swastha.com:7050
+    BatchTimeout: 2s
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 99 MB
+        PreferredMaxBytes: 512 KB
+    Kafka:
+        Brokers:
+            - kafka0:9092
+            - kafka1:9092
+            - kafka2:9092
+            - kafka3:9092
+    Organizations:
+Application: &ApplicationDefaults
+    Organizations:

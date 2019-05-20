@@ -7,30 +7,30 @@ PeerOrgs:
   - Name: material_vendor
     Domain: vendor.in.swastha.com
     Template:
-      Count: 3
+      Count: 1
     Users:
       Count: 1
   - Name: manufacture
     Domain: manufacture.in.swastha.com
     Template:
-      Count: 3
+      Count: 1
     Users:
       Count: 1
   - Name: distributor
     Domain: distributor.in.swastha.com
     Template:
-      Count: 3
+      Count: 1
     Users:
       Count: 1
   - Name: retailer
     Domain: retailer.in.swastha.com
     Template:
-      Count: 3
+      Count: 1
     Users:
       Count: 1
   - Name: regulator
     Domain: regulator.in.swastha.com
     Template:
-      Count: 3
+      Count: 1
     Users:
       Count: 1
