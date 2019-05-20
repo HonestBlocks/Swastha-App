@@ -1,0 +1,581 @@
+
+version: '2'
+
+networks:
+    behave:
+
+services:
+
+    couchdb10:
+        extends:
+            file: docker-compose-base.yml
+            service: couchdb
+        container_name: couchdb10
+        # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+        # for example map it to utilize Fauxton User Interface in dev environments.
+        ports:
+          - "1984:5984"
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+    couchdb20:
+        extends:
+            file: docker-compose-base.yml
+            service: couchdb
+        container_name: couchdb20
+        # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+        # for example map it to utilize Fauxton User Interface in dev environments.
+        ports:
+          - "2984:5984"
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+    couchdb30:
+        extends:
+            file: docker-compose-base.yml
+            service: couchdb
+        container_name: couchdb30
+        # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+        # for example map it to utilize Fauxton User Interface in dev environments.
+        ports:
+          - "3984:5984"
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+    couchdb40:
+        extends:
+            file: docker-compose-base.yml
+            service: couchdb
+        container_name: couchdb40
+        # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+        # for example map it to utilize Fauxton User Interface in dev environments.
+        ports:
+          - "4984:5984"
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+    couchdb50:
+        extends:
+            file: docker-compose-base.yml
+            service: couchdb
+        container_name: couchdb50
+        # Comment/Uncomment the port mapping if you want to hide/expose the CouchDB service,
+        # for example map it to utilize Fauxton User Interface in dev environments.
+        ports:
+          - "5984:5984"
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+
+    ca.vendor.in.swastha.com:
+        image: hyperledger/fabric-ca
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+            - FABRIC_CA_SERVER_CA_NAME=ca.vendor.in.swastha.com
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.vendor.in.swastha.com-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/206e19690d3487221cecc115eb645fb23b6b39e0f3193d45fda0abeb4fdcadfb_sk
+        ports:
+            - "1054:7054"
+        command: sh -c 'fabric-ca-server start -b admin:adminpw'
+        volumes:
+            - ../crypto-config/peerOrganizations/vendor.in.swastha.com/ca/:/etc/hyperledger/fabric-ca-server-config
+        container_name: ca.vendor.in.swastha.com
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+    
+    ca.manufacture.in.swastha.com:
+        image: hyperledger/fabric-ca
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+            - FABRIC_CA_SERVER_CA_NAME=ca.manufacture.in.swastha.com
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.manufacture.in.swastha.com-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/8bb92e0afc6d8275d2a9ace54471ba1e5b0c97cc0c1a0c2ff0e059974f4277bb_sk
+        ports:
+            - "2054:7054"
+        command: sh -c 'fabric-ca-server start -b admin:adminpw'
+        volumes:
+            - ../crypto-config/peerOrganizations/manufacture.in.swastha.com/ca/:/etc/hyperledger/fabric-ca-server-config
+        container_name: ca.manufacture.in.swastha.com
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+    ca.distributor.in.swastha.com:
+        image: hyperledger/fabric-ca
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+            - FABRIC_CA_SERVER_CA_NAME=ca.distributor.in.swastha.com
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.distributor.in.swastha.com-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/3019cf3d2c36df8a66bbaafea513237811a1006297357539ac79e4ebd13d5c88_sk
+        ports:
+            - "3054:7054"
+        command: sh -c 'fabric-ca-server start -b admin:adminpw'
+        volumes:
+            - ../crypto-config/peerOrganizations/distributor.in.swastha.com/ca/:/etc/hyperledger/fabric-ca-server-config
+        container_name: ca.distributor.in.swastha.com
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+    
+    ca.retailer.in.swastha.com:
+        image: hyperledger/fabric-ca
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+            - FABRIC_CA_SERVER_CA_NAME=ca.retailer.in.swastha.com
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.retailer.in.swastha.com-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ddcbb51dee986823dbf876b58ce1b1d45a1bab4cab9e6b89cb22f09942d4102a_sk
+        ports:
+            - "4054:7054"
+        command: sh -c 'fabric-ca-server start -b admin:adminpw'
+        volumes:
+            - ../crypto-config/peerOrganizations/retailer.in.swastha.com/ca/:/etc/hyperledger/fabric-ca-server-config
+        container_name: ca.retailer.in.swastha.com
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+    
+    ca.regulator.in.swastha.com:
+        image: hyperledger/fabric-ca
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+            - FABRIC_CA_SERVER_CA_NAME=ca.regulator.in.swastha.com
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.regulator.in.swastha.com-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/3d7498865e8913d8e28c5089db28f5a9ed9b28f6c74298182b444453f49c9166_sk
+        ports:
+            - "5054:7054"
+        command: sh -c 'fabric-ca-server start -b admin:adminpw'
+        volumes:
+            - ../crypto-config/peerOrganizations/regulator.in.swastha.com/ca/:/etc/hyperledger/fabric-ca-server-config
+        container_name: ca.regulator.in.swastha.com
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+
+    zookeeper0:
+        extends:
+            file: docker-compose-base.yml
+            service: zookeeper
+        container_name: zookeeper0
+        environment:
+            - ZOO_MY_ID=1
+            - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+
+    zookeeper1:
+        extends:
+            file: docker-compose-base.yml
+            service: zookeeper
+        container_name: zookeeper1
+        environment:
+            - ZOO_MY_ID=2
+            - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+
+    zookeeper2:
+        extends:
+            file: docker-compose-base.yml
+            service: zookeeper
+        container_name: zookeeper2
+        environment:
+            - ZOO_MY_ID=3
+            - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+
+    kafka0:
+        extends:
+            file: docker-compose-base.yml
+            service: kafka
+        container_name: kafka0
+        environment:
+            - KAFKA_BROKER_ID=0
+            - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+            - KAFKA_MESSAGE_MAX_BYTES=${KAFKA_MESSAGE_MAX_BYTES}
+            - KAFKA_REPLICA_FETCH_MAX_BYTES=${KAFKA_REPLICA_FETCH_MAX_BYTES}
+            - KAFKA_REPLICA_FETCH_RESPONSE_MAX_BYTES=${KAFKA_REPLICA_FETCH_RESPONSE_MAX_BYTES}
+        depends_on:
+            - zookeeper0
+            - zookeeper1
+            - zookeeper2
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+
+    kafka1:
+        extends:
+            file: docker-compose-base.yml
+            service: kafka
+        container_name: kafka1
+        environment:
+            - KAFKA_BROKER_ID=1
+            - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+            - KAFKA_MESSAGE_MAX_BYTES=${KAFKA_MESSAGE_MAX_BYTES}
+            - KAFKA_REPLICA_FETCH_MAX_BYTES=${KAFKA_REPLICA_FETCH_MAX_BYTES}
+            - KAFKA_REPLICA_FETCH_RESPONSE_MAX_BYTES=${KAFKA_REPLICA_FETCH_RESPONSE_MAX_BYTES}
+        depends_on:
+            - zookeeper0
+            - zookeeper1
+            - zookeeper2
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+
+    kafka2:
+        extends:
+            file: docker-compose-base.yml
+            service: kafka
+        container_name: kafka2
+        environment:
+            - KAFKA_BROKER_ID=2
+            - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+            - KAFKA_MESSAGE_MAX_BYTES=${KAFKA_MESSAGE_MAX_BYTES}
+            - KAFKA_REPLICA_FETCH_MAX_BYTES=${KAFKA_REPLICA_FETCH_MAX_BYTES}
+            - KAFKA_REPLICA_FETCH_RESPONSE_MAX_BYTES=${KAFKA_REPLICA_FETCH_RESPONSE_MAX_BYTES}
+        depends_on:
+            - zookeeper0
+            - zookeeper1
+            - zookeeper2
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+
+    kafka3:
+        extends:
+            file: docker-compose-base.yml
+            service: kafka
+        container_name: kafka3
+        environment:
+            - KAFKA_BROKER_ID=3
+            - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+            - KAFKA_MESSAGE_MAX_BYTES=${KAFKA_MESSAGE_MAX_BYTES}
+            - KAFKA_REPLICA_FETCH_MAX_BYTES=${KAFKA_REPLICA_FETCH_MAX_BYTES}
+            - KAFKA_REPLICA_FETCH_RESPONSE_MAX_BYTES=${KAFKA_REPLICA_FETCH_RESPONSE_MAX_BYTES}
+        depends_on:
+            - zookeeper0
+            - zookeeper1
+            - zookeeper2
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+
+    orderer0.in.swastha.com:
+        extends:
+            file: docker-compose-base.yml
+            service: orderer
+        container_name: orderer0.in.swastha.com
+        environment:
+            - ORDERER_HOST=orderer0.in.swastha.com
+            - CONFIGTX_ORDERER_ORDERERTYPE=kafka
+            - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
+            - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
+            - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
+            - ORDERER_KAFKA_VERBOSE=true
+            - ORDERER_GENERAL_GENESISPROFILE=SampleInsecureKafka
+            - ORDERER_ABSOLUTEMAXBYTES=${ORDERER_ABSOLUTEMAXBYTES}
+            - ORDERER_PREFERREDMAXBYTES=${ORDERER_PREFERREDMAXBYTES}
+        volumes:
+            - ../crypto-config/ordererOrganizations/in.swastha.com/orderers/orderer0.in.swastha.com/msp:/var/hyperledger/msp
+            - ../crypto-config/ordererOrganizations/in.swastha.com/orderers/orderer0.in.swastha.com/tls:/var/hyperledger/tls
+            - ../network-config/:/var/hyperledger/configs
+        depends_on:
+            - kafka0
+            - kafka1
+            - kafka2
+            - kafka3
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+        ports:
+          - 7050:7050
+
+    orderer1.in.swastha.com:
+        extends:
+            file: docker-compose-base.yml
+            service: orderer
+        container_name: orderer1.in.swastha.com
+        environment:
+            - ORDERER_HOST=orderer1.in.swastha.com
+            - CONFIGTX_ORDERER_ORDERERTYPE=kafka
+            - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
+            - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
+            - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
+            - ORDERER_KAFKA_RETRY_LONGINTERVAL=30s
+            - ORDERER_KAFKA_RETRY_LONGTOTAL=5m
+            - ORDERER_KAFKA_VERBOSE=true
+            - ORDERER_GENERAL_GENESISPROFILE=SampleInsecureKafka
+            - ORDERER_ABSOLUTEMAXBYTES=${ORDERER_ABSOLUTEMAXBYTES}
+            - ORDERER_PREFERREDMAXBYTES=${ORDERER_PREFERREDMAXBYTES}
+        volumes:
+            - ../crypto-config/ordererOrganizations/in.swastha.com/orderers/orderer1.in.swastha.com/msp:/var/hyperledger/msp
+            - ../crypto-config/ordererOrganizations/in.swastha.com/orderers/orderer1.in.swastha.com/tls:/var/hyperledger/tls
+            - ../network-config/:/var/hyperledger/configs
+        depends_on:
+            - kafka0
+            - kafka1
+            - kafka2
+            - kafka3
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+        ports:
+          - 8050:7050
+
+    orderer2.in.swastha.com:
+        extends:
+            file: docker-compose-base.yml
+            service: orderer
+        container_name: orderer2.in.swastha.com
+        environment:
+            - ORDERER_HOST=orderer2.in.swastha.com
+            - CONFIGTX_ORDERER_ORDERERTYPE=kafka
+            - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
+            - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
+            - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
+            - ORDERER_KAFKA_VERBOSE=true
+            - ORDERER_GENERAL_GENESISPROFILE=SampleInsecureKafka
+            - ORDERER_ABSOLUTEMAXBYTES=${ORDERER_ABSOLUTEMAXBYTES}
+            - ORDERER_PREFERREDMAXBYTES=${ORDERER_PREFERREDMAXBYTES}
+        volumes:
+            - ../crypto-config/ordererOrganizations/in.swastha.com/orderers/orderer2.in.swastha.com/msp:/var/hyperledger/msp
+            - ../crypto-config/ordererOrganizations/in.swastha.com/orderers/orderer2.in.swastha.com/tls:/var/hyperledger/tls
+            - ../network-config/:/var/hyperledger/configs
+        depends_on:
+            - kafka0
+            - kafka1
+            - kafka2
+            - kafka3
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+        ports:
+          - 9050:7050
+
+    peer0.vendor.in.swastha.com:
+        extends:
+            file: docker-compose-base.yml
+            service: peer
+        container_name: peer0.vendor.in.swastha.com
+        environment:
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer0.vendor.in.swastha.com:7052
+            - CORE_PEER_ID=peer0.vendor.in.swastha.com
+            - CORE_PEER_ADDRESS=peer0.vendor.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.vendor.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.vendor.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_ORGLEADER=${CORE_PEER_GOSSIP_ORGLEADER_PEER0_Vendor}
+            - CORE_PEER_GOSSIP_USELEADERELECTION=${CORE_PEER_GOSSIP_USELEADERELECTION_PEER0_Vendor}
+            - CORE_PEER_LOCALMSPID=VendorMSP
+            - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@vendor.in.swastha.com/tls/ca.crt
+            - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@vendor.in.swastha.com/tls/client.crt
+            - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@vendor.in.swastha.com/tls/client.key
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb00:5984
+            
+
+        volumes:
+            - ../crypto-config/peerOrganizations/vendor.in.swastha.com/peers/peer0.vendor.in.swastha.com/msp:/var/hyperledger/msp
+            - ../crypto-config/peerOrganizations/vendor.in.swastha.com/peers/peer0.vendor.in.swastha.com/tls:/var/hyperledger/tls
+            - ../crypto-config/peerOrganizations/vendor.in.swastha.com/users:/var/hyperledger/users
+            - ../network-config/:/var/hyperledger/configs
+
+        depends_on:
+            - orderer0.in.swastha.com
+            - orderer1.in.swastha.com
+            - orderer2.in.swastha.com
+            - couchdb00
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+        ports:
+          - 1051:7051
+          - 1052:7052
+          - 1053:7053
+
+
+    peer0.manufacture.in.swastha.com:
+        extends:
+            file: docker-compose-base.yml
+            service: peer
+        container_name: peer0.manufacture.in.swastha.com
+        environment:
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer0.manufacture.in.swastha.com:7052
+            - CORE_PEER_ID=peer0.manufacture.in.swastha.com
+            - CORE_PEER_ADDRESS=peer0.manufacture.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.manufacture.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.manufacture.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_ORGLEADER=${CORE_PEER_GOSSIP_ORGLEADER_PEER0_manufacture}
+            - CORE_PEER_GOSSIP_USELEADERELECTION=${CORE_PEER_GOSSIP_USELEADERELECTION_PEER0_manufacture}
+            - CORE_PEER_LOCALMSPID=manufactureMSP
+            - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@manufacture.in.swastha.com/tls/ca.crt
+            - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@manufacture.in.swastha.com/tls/client.crt
+            - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@manufacture.in.swastha.com/tls/client.key
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb10:5984
+
+        volumes:
+            - ../crypto-config/peerOrganizations/manufacture.in.swastha.com/peers/peer0.manufacture.in.swastha.com/msp:/var/hyperledger/msp
+            - ../crypto-config/peerOrganizations/manufacture.in.swastha.com/peers/peer0.manufacture.in.swastha.com/tls:/var/hyperledger/tls
+            - ../crypto-config/peerOrganizations/manufacture.in.swastha.com/users:/var/hyperledger/users
+            - ../network-config/:/var/hyperledger/configs
+
+        depends_on:
+            - orderer0.in.swastha.com
+            - orderer1.in.swastha.com
+            - orderer2.in.swastha.com
+            - couchdb10
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+        ports:
+          - 4051:7051
+          - 4052:7052
+          - 4053:7053
+
+    peer0.distributor.in.swastha.com:
+        extends:
+            file: docker-compose-base.yml
+            service: peer
+        container_name: peer0.distributor.in.swastha.com
+        environment:
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer0.distributor.in.swastha.com:7052
+            - CORE_PEER_ID=peer0.distributor.in.swastha.com
+            - CORE_PEER_ADDRESS=peer0.distributor.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.distributor.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.distributor.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_ORGLEADER=${CORE_PEER_GOSSIP_ORGLEADER_PEER0_Distributor}
+            - CORE_PEER_GOSSIP_USELEADERELECTION=${CORE_PEER_GOSSIP_USELEADERELECTION_PEER0_Distributor}
+            - CORE_PEER_LOCALMSPID=DistributorMSP
+            - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@distributor.in.swastha.com/tls/ca.crt
+            - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@distributor.in.swastha.com/tls/client.crt
+            - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@distributor.in.swastha.com/tls/client.key
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb20:5984
+            
+
+        volumes:
+            - ../crypto-config/peerOrganizations/distributor.in.swastha.com/peers/peer0.distributor.in.swastha.com/msp:/var/hyperledger/msp
+            - ../crypto-config/peerOrganizations/distributor.in.swastha.com/peers/peer0.distributor.in.swastha.com/tls:/var/hyperledger/tls
+            - ../crypto-config/peerOrganizations/distributor.in.swastha.com/users:/var/hyperledger/users
+            - ../network-config/:/var/hyperledger/configs
+
+        depends_on:
+            - orderer0.in.swastha.com
+            - orderer1.in.swastha.com
+            - orderer2.in.swastha.com
+            - couchdb20
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+        ports:
+          - 7051:7051
+          - 7052:7052
+          - 7053:7053
+
+    peer0.retailer.in.swastha.com:
+        extends:
+            file: docker-compose-base.yml
+            service: peer
+        container_name: peer0.retailer.in.swastha.com
+        environment:
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer0.retailer.in.swastha.com:7052
+            - CORE_PEER_ID=peer0.retailer.in.swastha.com
+            - CORE_PEER_ADDRESS=peer0.retailer.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.retailer.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.retailer.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_ORGLEADER=${CORE_PEER_GOSSIP_ORGLEADER_PEER0_Retailer}
+            - CORE_PEER_GOSSIP_USELEADERELECTION=${CORE_PEER_GOSSIP_USELEADERELECTION_PEER0_Retailer}
+            - CORE_PEER_LOCALMSPID=RetailerMSP
+            - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@retailer.in.swastha.com/tls/ca.crt
+            - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@retailer.in.swastha.com/tls/client.crt
+            - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@retailer.in.swastha.com/tls/client.key
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb30:5984
+            
+
+        volumes:
+            - ../crypto-config/peerOrganizations/retailer.in.swastha.com/peers/peer0.retailer.in.swastha.com/msp:/var/hyperledger/msp
+            - ../crypto-config/peerOrganizations/retailer.in.swastha.com/peers/peer0.retailer.in.swastha.com/tls:/var/hyperledger/tls
+            - ../crypto-config/peerOrganizations/retailer.in.swastha.com/users:/var/hyperledger/users
+            - ../network-config/:/var/hyperledger/configs
+
+        depends_on:
+            - orderer0.in.swastha.com
+            - orderer1.in.swastha.com
+            - orderer2.in.swastha.com
+            - couchdb30
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+        ports:
+          - 10051:7051
+          - 10052:7052
+          - 10053:7053
+
+    peer0.regulator.in.swastha.com:
+        extends:
+            file: docker-compose-base.yml
+            service: peer
+        container_name: peer0.regulator.in.swastha.com
+        environment:
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer0.regulator.in.swastha.com:7052
+            - CORE_PEER_ID=peer0.regulator.in.swastha.com
+            - CORE_PEER_ADDRESS=peer0.regulator.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.regulator.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.regulator.in.swastha.com:7051
+            - CORE_PEER_GOSSIP_ORGLEADER=${CORE_PEER_GOSSIP_ORGLEADER_PEER0_Regulator}
+            - CORE_PEER_GOSSIP_USELEADERELECTION=${CORE_PEER_GOSSIP_USELEADERELECTION_PEER0_Regulator}
+            - CORE_PEER_LOCALMSPID=RegulatorMSP
+            - CORE_PEER_TLS_CLIENTROOTCAS_FILES=/var/hyperledger/users/Admin@regulator.in.swastha.com/tls/ca.crt
+            - CORE_PEER_TLS_CLIENTCERT_FILE=/var/hyperledger/users/Admin@regulator.in.swastha.com/tls/client.crt
+            - CORE_PEER_TLS_CLIENTKEY_FILE=/var/hyperledger/users/Admin@regulator.in.swastha.com/tls/client.key
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb40:5984
+            
+
+        volumes:
+            - ../crypto-config/peerOrganizations/regulator.in.swastha.com/peers/peer0.regulator.in.swastha.com/msp:/var/hyperledger/msp
+            - ../crypto-config/peerOrganizations/regulator.in.swastha.com/peers/peer0.regulator.in.swastha.com/tls:/var/hyperledger/tls
+            - ../crypto-config/peerOrganizations/regulator.in.swastha.com/users:/var/hyperledger/users
+            - ../network-config/:/var/hyperledger/configs
+
+        depends_on:
+            - orderer0.in.swastha.com
+            - orderer1.in.swastha.com
+            - orderer2.in.swastha.com
+            - couchdb40
+        networks:
+          behave:
+             aliases:
+               - ${CORE_PEER_NETWORKID}
+        ports:
+          - 13051:7051
+          - 13052:7052
+          - 13053:7053
