@@ -406,7 +406,7 @@ services:
             - orderer0.in.swastha.com
             - orderer1.in.swastha.com
             - orderer2.in.swastha.com
-            - couchdb00
+            - couchdb10
         networks:
           behave:
              aliases:
@@ -447,7 +447,7 @@ services:
             - orderer0.in.swastha.com
             - orderer1.in.swastha.com
             - orderer2.in.swastha.com
-            - couchdb10
+            - couchdb20
         networks:
           behave:
              aliases:
@@ -488,7 +488,7 @@ services:
             - orderer0.in.swastha.com
             - orderer1.in.swastha.com
             - orderer2.in.swastha.com
-            - couchdb20
+            - couchdb30
         networks:
           behave:
              aliases:
@@ -529,7 +529,7 @@ services:
             - orderer0.in.swastha.com
             - orderer1.in.swastha.com
             - orderer2.in.swastha.com
-            - couchdb30
+            - couchdb40
         networks:
           behave:
              aliases:
@@ -570,7 +570,7 @@ services:
             - orderer0.in.swastha.com
             - orderer1.in.swastha.com
             - orderer2.in.swastha.com
-            - couchdb40
+            - couchdb50
         networks:
           behave:
              aliases:
