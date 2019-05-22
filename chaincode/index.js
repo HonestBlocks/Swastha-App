@@ -4,7 +4,7 @@
 
 'use strict';
 
-const SwasthaContract = require('./lib/fabcar');
+const SwasthaContract = require('./lib/SwasthaContract');
 
 module.exports.SwasthaContract = SwasthaContract;
 module.exports.contracts = [ SwasthaContract ];

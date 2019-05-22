@@ -17,6 +17,7 @@
     "author": "Gaurav Bothra",
     "license": "MIT",
     "dependencies": {
+        "activedirectory": "^0.7.2",
         "fabric-contract-api": "~1.4.0",
         "fabric-shim": "~1.4.0"
     },
