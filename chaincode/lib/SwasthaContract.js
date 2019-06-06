@@ -28,6 +28,7 @@ class SwasthaContract extends Contract {
      */
 
     async vendor_view_po(ctx, vendor_id) {
+        console.info('============= START : Vendor View PO ===========');
         const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "manufacture_po"},{"vendor_id": {"$eq": ${vendor_id}}}]}`);
         const allResults = [];
         while (true) {
@@ -68,6 +69,7 @@ class SwasthaContract extends Contract {
 
     
     async vendor_view_single_po(ctx, po_no, vendor_id) {
+        console.info('============= START : Vendor View Single PO ===========');
         const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "manufacture_po"},{"vendor_id": {"$eq": ${vendor_id}}},{"po_no": {"$eq": ${po_no}}}]}`);
         const allResults = [];
         while (true) {
@@ -107,7 +109,37 @@ class SwasthaContract extends Contract {
      */
 
      async vendor_change_po_status(ctx, po_no, vendor_id, status) {
+        console.info('============= START : Vendor Change PO Status ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "manufacture_po"},{"vendor_id": {"$eq": ${vendor_id}}},{"po_no": {"$eq": ${po_no}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
 
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                let newPO = JSON.parse(JSON.stringify(allResults));
+                newPO.status.push(JSON.parse(status));
+                await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(newPO))));
+                return JSON.stringify(newPO);
+            }
+        }  
      }
 
 
@@ -118,7 +150,10 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_generate_po(ctx, payload) {
-        
+        console.info('============= START : Manufacture Generate PO ===========');
+        let newPayload = JSON.parse(payload);
+        await ctx.stub.putState(newPayload.po_no, Buffer.from(JSON.parse(JSON.stringify(payload))));
+        return payload;
     }
 
     /**
@@ -128,7 +163,35 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_view_po(ctx, created_by) {
+        console.info('============= START : Manufacture View Their OWN PO ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "manufacture_po"},{"created_by": {"$eq": ${created_by}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
 
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                console.info(allResults);
+                return JSON.stringify(allResults);
+            }
+        }
     }
 
     /**
@@ -139,7 +202,35 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_view_single_po(ctx, created_by, po_no) {
-            
+        console.info('============= START : Manufacture View Their OWN PO BY PO_NO ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "manufacture_po"},{"created_by": {"$eq": ${created_by}}}, {"po_no": {"$eq": ${po_no}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                console.info(allResults);
+                return JSON.stringify(allResults);
+            }
+        }   
     }
 
     /**
@@ -151,7 +242,37 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_do_qc(ctx, created_by, po_no, qualityCheck) {
-            
+        console.info('============= START : Manufacture Do Quality Check ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "manufacture_po"},{"created_by": {"$eq": ${created_by}}},{"po_no": {"$eq": ${po_no}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                let newPO = JSON.parse(JSON.stringify(allResults));
+                newPO.status.push(JSON.parse(qualityCheck));
+                await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(newPO))));
+                return JSON.stringify(newPO);
+            }
+        }
     }
 
     /**
@@ -163,7 +284,37 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_do_grn(ctx, created_by, po_no, grn_status) {
-            
+        console.info('============= START : Manifacture Do GRN of Material ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "manufacture_po"},{"created_by": {"$eq": ${created_by}}},{"po_no": {"$eq": ${po_no}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                let newPO = JSON.parse(JSON.stringify(allResults));
+                newPO.status.push(JSON.parse(grn_status));
+                await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(newPO))));
+                return JSON.stringify(newPO);
+            }
+        }
     }
 
 
@@ -174,7 +325,10 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_create_product(ctx, payload) {
-            
+        console.info('============= START : Manufacture Create Product ===========');
+        let newPayload = JSON.parse(payload);
+        await ctx.stub.putState(newPayload.serial_no, Buffer.from(JSON.parse(JSON.stringify(payload))));
+        return payload;
     }
 
     /**
@@ -184,7 +338,35 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_view_product(ctx, created_by) {
-            
+        console.info('============= START : Manufacture View Product List ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "product"},{"created_by": {"$eq": ${created_by}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                console.info(allResults);
+                return JSON.stringify(allResults);
+            }
+        }   
     }
 
     /**
@@ -194,8 +376,35 @@ class SwasthaContract extends Contract {
      * @param {string} serial_no Serial No. of Product
      */
 
-    async manufacture_view_single_product(ctx, created_by) {
-            
+    async manufacture_view_single_product(ctx, created_by, serial_no) {
+        console.info('============= START : Manufacture View Single Product ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "manufacture_po"},{"created_by": {"$eq": ${created_by}}},{"serial_no": {"$eq": ${serial_no}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                console.info(allResults);
+                return JSON.stringify(allResults);
+            }
+        }
     }
 
     /**
@@ -203,10 +412,45 @@ class SwasthaContract extends Contract {
      * @param {object} ctx Super Class Object from from Contract Class
      * @param {string} created_by Manufacture Unique ID.
      * @param {string} batch_no Serial No. of Product.
+     * @param {string} box_no BoxNo 
+     * @param {string} newOwner New Owner of Box
      */
 
-    async manufacture_do_boxing(ctx, created_by, batch_no) {
-            
+    async manufacture_do_boxing(ctx, created_by, batch_no, box_no, newOwner) {
+        console.info('============= START : Manifacture Do Packaging of Product ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "product"},{"created_by": {"$eq": ${created_by}}},{"batch_no": {"$eq": ${batch_no}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                // TODO: Looping Logic -> Acc to batch no
+                let newPO = JSON.parse(JSON.stringify(allResults));
+                newPO.boxid = box_no;
+                newPO.currentOwner = newOwner;
+                newOwner.ownerchain.push(JSON.parse(JSON.stringify({"owner" : newOwner, "date" : Date.now()})));
+                await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(newPO))));
+                return JSON.stringify(newPO);
+            }
+        }
     }
 
     /**
@@ -216,7 +460,35 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_view_po_of_distributor(ctx, manufacture_id) {
-            
+        console.info('============= START : Manufacture View Distributor Purchase Order ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "distributor_po"},{"manufacture_id": {"$eq": ${manufacture_id}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                console.info(allResults);
+                return JSON.stringify(allResults);
+            }
+        }
     }
 
     /**
@@ -227,7 +499,35 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_view_single_po_of_distributor(ctx, manufacture_id, po_no) {
-            
+        console.info('============= START : Manufacture View Distributor Po by Po_no ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "distributor_po"},{"manufacture": {"$eq": ${manufacture_id}}},{"po_no": {"$eq": ${po_no}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                console.info(allResults);
+                return JSON.stringify(allResults);
+            }
+        }    
     }
 
 
@@ -240,7 +540,37 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_change_po_status_of_distributor(ctx, manufacture_id, po_no, status) {
-            
+        console.info('============= START : Vendor Change PO Status ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"$doc_type": "distributor_po"},{"manufacture_id": {"$eq": ${manufacture_id}}},{"po_no": {"$eq": ${po_no}}}]}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                let newPO = JSON.parse(JSON.stringify(allResults));
+                newPO.status.push(JSON.parse(status));
+                await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(newPO))));
+                return JSON.stringify(newPO);
+            }
+        }  
     }
 
     /**
@@ -250,7 +580,7 @@ class SwasthaContract extends Contract {
      */
 
     async regulator_search_product_using_raw_material(ctx, material_code) {
-            
+        // TODO: CoachDB Index Searching
     }
 
     /**
@@ -261,7 +591,7 @@ class SwasthaContract extends Contract {
      */
 
     async regulator_search_product_by_serial_no_batch_no(ctx, serial_no, batch_no) {
-            
+        // TODO: CoachDB Index Searching
     }
 
 
@@ -272,7 +602,10 @@ class SwasthaContract extends Contract {
      */
 
     async distributor_generate_po(ctx, payload) {
-            
+        console.info('============= START : Distributor Generate PO ===========');
+        let newPayload = JSON.parse(payload);
+        await ctx.stub.putState(newPayload.po_no, Buffer.from(JSON.parse(JSON.stringify(payload))));
+        return payload;
     }
 
     /**
@@ -282,7 +615,7 @@ class SwasthaContract extends Contract {
      */
 
     async distributor_view_po(ctx, created_by) {
-            
+        
     }
 
     /**
@@ -359,7 +692,10 @@ class SwasthaContract extends Contract {
      */
 
     async retailer_view_po(ctx, created_by) {
-            
+        console.info('============= START : Retailer Generate PO ===========');
+        let newPayload = JSON.parse(payload);
+        await ctx.stub.putState(newPayload.po_no, Buffer.from(JSON.parse(JSON.stringify(payload))));
+        return payload;   
     }
 
     /**
@@ -383,6 +719,16 @@ class SwasthaContract extends Contract {
 
     async retailer_add_product_into_cart(ctx, retailer_id, serial_no, newOwner) {
             
+    }
+
+    /**
+     * Retailer View Purchase Order List.
+     * @param {object} ctx Super Class Object from from Contract Class
+     * @param {string} serial_no Serial No of Product.
+     */
+
+    async customer_query(ctx, serial_no) {
+        // TODO: Customer Query's
     }
 
 }   
