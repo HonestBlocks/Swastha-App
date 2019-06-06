@@ -1,0 +1,24 @@
+<ion-content>
+  <form method="post">
+      <ion-item lines="none">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input ngModel type="text" name="name"></ion-input>
+      </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">User Name</ion-label>
+      <ion-input ngModel type="email" name="email"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input ngModel type="password" name="password"></ion-input>
+    </ion-item>
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" expand="full" color="primary">Submit</ion-button>
+    </ion-col>
+    <ion-col>
+    <ion-button expand="full" color="danger" >Clear</ion-button>
+    </ion-col>
+  </ion-row>
+  </form>
+</ion-content>
