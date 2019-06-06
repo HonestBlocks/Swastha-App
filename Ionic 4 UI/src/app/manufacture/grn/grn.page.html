@@ -1,0 +1,18 @@
+<form>
+    <ion-item>
+      <ion-label position="floating">Material Name</ion-label>
+      <ion-input ngModel type="text" name="mname"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Choose States</ion-label>
+        <ion-select placeholder="Choose one">
+        <ion-select-option value="r">Received</ion-select-option>
+        <ion-select-option value="nr">Not Received</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Update Date</ion-label>
+      <ion-input ngModel type="text" name="udate"></ion-input>
+    </ion-item>
+    <ion-button type="submit" expand="full" color="primary">Submit</ion-button>
+    </form>

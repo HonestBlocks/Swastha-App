@@ -1,0 +1,78 @@
+<ion-row>
+  <ion-col>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title style="text-align: center;">Add Material</ion-title>
+      </ion-toolbar>
+    </ion-header>
+      <form>
+        <ion-item>
+          <ion-label position="floating">Material Name</ion-label>
+          <ion-input ngModel type="text" name="mname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Material Code</ion-label>
+          <ion-input ngModel type="text" name="mcode"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Material Description</ion-label>
+          <ion-input ngModel type="text" name="mdescription"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Material Specification</ion-label>
+          <ion-input ngModel type="text" name="mspec"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Price</ion-label>
+          <ion-input ngModel type="text" name="price"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Quantitiy</ion-label>
+          <ion-input ngModel type="text" name="quantity"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Unit Of Measurement</ion-label>
+          <ion-select placeholder="Unit Of Measurement">
+            <ion-select-option value="k">Kilogram</ion-select-option>
+            <ion-select-option value="l">Litre</ion-select-option>
+            <ion-select-option value="e">Each</ion-select-option>
+          </ion-select>
+        </ion-item>
+      
+        <ion-button type="submit" expand="full" color="primary">Add Material</ion-button>
+      </form>
+      <ion-button expand="full" color="danger">Clear</ion-button>
+  </ion-col>
+  <ion-col>
+    <form>
+      <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">PO Number</ion-label>
+                  <ion-input ngModel type="text" name="pname"></ion-input>
+                </ion-item> 
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">Vendor Code</ion-label>
+                  <ion-input ngModel type="text" name="vcode"></ion-input>
+                </ion-item> 
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">Expected Date</ion-label>
+                  <ion-input ngModel type="text" name="edate"></ion-input>
+                </ion-item> 
+          </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <ion-button expand="full" color="danger">Clear</ion-button>  
+        </ion-col>
+        <ion-col>
+            <ion-button type="submit" expand="full" color="primary">Submit</ion-button>   
+        </ion-col>
+      </ion-row>
+      </form>
+    </ion-col>
+</ion-row>
