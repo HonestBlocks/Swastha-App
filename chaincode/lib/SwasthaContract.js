@@ -646,7 +646,7 @@ class SwasthaContract extends Contract {
      * @param {string} po_no Purchase Order.
      */
 
-    async distributor_view_single_po_of_retailer(ctx, po_no) {
+    async distributor_view_single_po_of_retailer(ctx, distributor_id, po_no) {
             
     }
 
@@ -658,7 +658,7 @@ class SwasthaContract extends Contract {
      * @param {object} status Current Status of Order
      */
 
-    async distributor_change_po_status_of_retailer(ctx, po_no) {
+    async distributor_change_po_status_of_retailer(ctx, distributor_id, po_no, status) {
             
     }
 
@@ -682,7 +682,10 @@ class SwasthaContract extends Contract {
      */
 
     async retailer_generate_po(ctx, distributor_id, box_no, serial_no) {
-            
+        console.info('============= START : Retailer Generate PO ===========');
+        let newPayload = JSON.parse(payload);
+        await ctx.stub.putState(newPayload.po_no, Buffer.from(JSON.parse(JSON.stringify(payload))));
+        return payload;   
     }
 
     /**
@@ -692,10 +695,6 @@ class SwasthaContract extends Contract {
      */
 
     async retailer_view_po(ctx, created_by) {
-        console.info('============= START : Retailer Generate PO ===========');
-        let newPayload = JSON.parse(payload);
-        await ctx.stub.putState(newPayload.po_no, Buffer.from(JSON.parse(JSON.stringify(payload))));
-        return payload;   
     }
 
     /**

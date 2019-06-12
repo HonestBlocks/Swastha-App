@@ -1,9 +1,71 @@
 let express = require('express');
 let bodyParser = require('body-parser');
-
+let db = require('./config/dbConfig');
+let _ = require('lodash');
+let bcryptjs = require('bcryptjs');
+let jwt = require('jsonwebtoken');
 require('dotenv').config()
+
+//Getting all routes
+let vendorRoute = require('./routes/vendorRoute');
+let manufactureRoute = require('./routes/manufactureRoute');
+let distributorRoute = require('./routes/distributorRoute');
+let retailerRoute = require('./routes/RetailerRoute');
+let regulatorRoute = require('./routes/regulatorRoute');
+
+
 let app = express();
 
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+app.post('/api/login', (req, res) =>{
+    let body = _.pick(req.body, ['email', 'password']);
+    let sql = 'SELECT * FROM users where email = ?'
+    let query = db.query(sql, [body.email], (err, resultset) => {
+        if(err) {
+            res.status(500).json({msg : "Database Error"}).end();
+        } else {
+            bcryptjs.compare(body.password, resultset[0].password, (err, success) => {
+                if (success) {
+                    let token = jwt.sign({email : resultset[0].email, role : resultset[0].type, notificationID : resultset[0].subscriberID, verified : resultset[0].verified},process.env.JSON_SECRET,{expiresIn:'2h'});
+                    return res.status(200).json({token}).end();
+                } else {
+                    return res.status(401).json({msg : "Unauthorized User"}).end();
+                }
+            })
+        }
+    });
+});
+
+
+app.post('/api/register', (req, res) =>{
+    let body = _.pick(req.body, ['email', 'name', 'type', 'password', 'phoneNO']);
+    body['verified'] = 0;
+    bcryptjs.genSalt(10, (err, salt) => {
+        bcryptjs.hash(body.password, salt, (err, hash) => {
+            body.password = hash;
+            let sql = 'INSERT INTO users SET ?';
+            let query = db.query(sql, [body], (err, resultset) => {
+                if(err) {
+                    console.log(err);
+                    res.status(500).json({msg : "Database Error"}).end();   
+                } else {
+                    let token = jwt.sign({email : resultset[0].email, role : resultset[0].type, notificationID : resultset[0].subscriberID, verified : resultset[0].verified},process.env.JSON_SECRET,{expiresIn:'2h'});
+                    return res.status(200).json({token}).end();
+                }
+            });
+        });
+    });
+});
+
+//Using all Routes
+app.use('/api/vendor', vendorRoute);
+app.use('/api/manufacture', manufactureRoute);
+app.use('/api/retailer', retailerRoute);
+app.use('/api/distributor', distributorRoute);
+app.use('/api/regulator', regulatorRoute);
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log(`App is running at ${process.env.SERVER_PORT}`)

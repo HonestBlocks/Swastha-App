@@ -9,13 +9,14 @@
   "author": "Gaurav Bothra",
   "license": "ISC",
   "dependencies": {
-    "activedirectory": "^0.7.2",
-    "ad": "^0.3.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "dotenv": "^8.0.0",
     "express": "^4.17.0",
     "jsonwebtoken": "^8.5.1",
-    "ldapjs": "^1.0.2",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "nodemailer": "^6.2.1"
   }
 }
