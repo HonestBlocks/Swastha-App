@@ -1,7 +1,7 @@
 {
-    "name": "fabcar",
+    "name": "swastha-app",
     "version": "1.0.0",
-    "description": "Hyperledger Fabric Car Sample Application",
+    "description": "Hyperledger Fabric Application of Swastha",
     "main": "fabcar.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,13 +11,10 @@
         "fabric-client": "~1.4.0",
         "grpc": "^1.6.0"
     },
-    "author": "Anthony O'Dowd",
+    "author": "Gaurav",
     "license": "Apache-2.0",
     "keywords": [
         "Hyperledger",
-        "Fabric",
-        "Car",
-        "Sample",
-        "Application"
+        "Fabric"
     ]
 }
