@@ -1,0 +1,11 @@
+<form>
+  <ion-item>
+    <ion-label position="floating">PO Number</ion-label>
+    <ion-input ngModel type="text" name="ponumber"></ion-input>
+  </ion-item>
+  <ion-item>
+      <!-- <ionic-calendar-date-picker (onSelect)="dateSelected($event)">Select One</ionic-calendar-date-picker> -->
+       <ionic-calendar-date-picker [notInCalendarStyle]="{'color': 'red', 'font-weight': 'bold'}"></ionic-calendar-date-picker>
+  </ion-item>
+  <ion-button type="submit" expand="full" color="primary">Submit</ion-button>
+</form>

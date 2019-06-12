@@ -1,0 +1,18 @@
+<form>
+  <ion-item lines="none">
+    <ion-label position="floating">PO Number.</ion-label>
+    <ion-input ngModel type="text" name="mname" placeholder="Select Po Number"></ion-input>
+  </ion-item>
+  <ion-item lines="none">
+      <ion-label>Choose States</ion-label>
+      <ion-select placeholder="Choose one">
+      <ion-select-option value="r">Received</ion-select-option>
+      <ion-select-option value="p">Pending</ion-select-option>
+      </ion-select>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label position="floating">Update Date</ion-label>
+    <ion-input ngModel type="text" name="udate"></ion-input>
+  </ion-item>
+  <ion-button type="submit" color="primary" style="margin-right: 100%;">Submit</ion-button>
+  </form>

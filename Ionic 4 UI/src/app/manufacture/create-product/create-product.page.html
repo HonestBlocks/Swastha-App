@@ -1,0 +1,94 @@
+<ion-row>
+    <ion-col>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Reciept</ion-title>
+        </ion-toolbar>
+      </ion-header>
+        <form>
+          <ion-item>
+            <ion-label position="floating">Material Name</ion-label>
+            <ion-input ngModel type="text" name="mname"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Material Code</ion-label>
+            <ion-input ngModel type="text" name="mcode"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Material Batch Number</ion-label>
+            <ion-input ngModel type="text" name="mbnumber"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Material Description</ion-label>
+            <ion-textarea ngModel type="text" name="mdescription"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Quantitiy</ion-label>
+            <ion-input ngModel type="text" name="quantity"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Unit Of Measurement</ion-label>
+            <ion-select placeholder="Unit Of Measurement">
+              <ion-select-option value="k">Kilogram</ion-select-option>
+              <ion-select-option value="l">Litre</ion-select-option>
+              <ion-select-option value="e">Each</ion-select-option>
+            </ion-select>
+          </ion-item>
+        
+          <ion-button type="submit" expand="full" color="primary">Add Material</ion-button>
+        </form>
+        <ion-button expand="full" color="danger">Clear</ion-button>
+    </ion-col>
+    <ion-col>
+      <form>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">Product Name</ion-label>
+                    <ion-input ngModel type="text" name="pname"></ion-input>
+                  </ion-item> 
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">Manufacturing Date</ion-label>
+                    <ion-input ngModel type="text" name="mdate"></ion-input>
+                  </ion-item> 
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">Expire Date</ion-label>
+                    <ion-input ngModel type="text" name="edate"></ion-input>
+                  </ion-item> 
+            </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">Product Description</ion-label>
+                  <ion-input ngModel type="text" name="pdescription"></ion-input>
+                </ion-item>  
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">Serial Number</ion-label>
+                  <ion-input ngModel type="text" name="snumber"></ion-input>
+                </ion-item>  
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">Batch Number</ion-label>
+                  <ion-input ngModel type="text" name="bnumber"></ion-input>
+                </ion-item>  
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <ion-button expand="full" color="danger">Clear</ion-button>  
+          </ion-col>
+          <ion-col>
+              <ion-button type="submit" expand="full" color="primary">Submit</ion-button>   
+          </ion-col>
+        </ion-row>
+        </form>
+      </ion-col>
+  </ion-row>
