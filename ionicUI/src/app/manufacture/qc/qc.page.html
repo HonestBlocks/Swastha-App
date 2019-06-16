@@ -1,11 +1,23 @@
-<form>
-  <ion-item>
-    <ion-label position="floating">PO Number</ion-label>
-    <ion-input ngModel type="text" name="ponumber"></ion-input>
-  </ion-item>
-  <ion-item>
-      <!-- <ionic-calendar-date-picker (onSelect)="dateSelected($event)">Select One</ionic-calendar-date-picker> -->
-       <ionic-calendar-date-picker [notInCalendarStyle]="{'color': 'red', 'font-weight': 'bold'}"></ionic-calendar-date-picker>
-  </ion-item>
-  <ion-button type="submit" expand="full" color="primary">Submit</ion-button>
-</form>
+<ion-header>
+  <ion-toolbar>
+      <ion-button slot="start">
+          <ion-menu-button>Menu</ion-menu-button>
+        </ion-button>
+    <ion-title>qc</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form>
+        <ion-item lines="none">
+          <ion-label position="floating">PO Number</ion-label>
+          <ion-input ngModel type="text" name="ponumber"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+            <!-- <ionic-calendar-date-picker (onSelect)="dateSelected($event)">Select One</ionic-calendar-date-picker> -->
+             <ionic-calendar-date-picker [notInCalendarStyle]="{'color': 'red', 'font-weight': 'bold'}"></ionic-calendar-date-picker>
+        </ion-item>
+        <ion-button type="submit" expand="full" color="primary">Submit</ion-button>
+      </form>
+
+</ion-content>
