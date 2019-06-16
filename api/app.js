@@ -4,6 +4,7 @@ let db = require('./config/dbConfig');
 let _ = require('lodash');
 let bcryptjs = require('bcryptjs');
 let jwt = require('jsonwebtoken');
+let cors = require("cors");
 require('dotenv').config()
 
 //Getting all routes
@@ -16,12 +17,17 @@ let regulatorRoute = require('./routes/regulatorRoute');
 
 let app = express();
 
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.get('/api', (req, res) => {
+    res.status(200).json({msg:"Blockchain Api is working"}).end();
+});
+
 app.post('/api/login', (req, res) =>{
     let body = _.pick(req.body, ['email', 'password']);
+    console.log(body)
     let sql = 'SELECT * FROM users where email = ?'
     let query = db.query(sql, [body.email], (err, resultset) => {
         if(err) {

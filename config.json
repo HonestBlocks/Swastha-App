@@ -1,0 +1,174 @@
+{
+  "network-configs": {
+    "network-1": {
+      "version": "1.0",
+      "clients": {
+        "client-1": {
+          "tlsEnable": false,
+          "organization": "vendorMSP",
+          "channel": "commonchannel",
+          "credentialStore": {
+            "path": "./tmp/credentialStore_Org1/credential",
+            "cryptoStore": {
+              "path": "./tmp/credentialStore_Org1/crypto"
+            }
+          }
+        },
+        "client-2": {
+          "tlsEnable": false,
+          "organization": "manufactureMSP",
+          "channel": "commonchannel",
+          "credentialStore": {
+            "path": "./tmp/credentialStore_Org2/credential",
+            "cryptoStore": {
+              "path": "./tmp/credentialStore_Org2/crypto"
+            }
+          }
+        },
+        "client-3": {
+          "tlsEnable": false,
+          "organization": "distributorMSP",
+          "channel": "commonchannel",
+          "credentialStore": {
+            "path": "./tmp/credentialStore_Org3/credential",
+            "cryptoStore": {
+              "path": "./tmp/credentialStore_Org3/crypto"
+            }
+          }
+        },
+        "client-4": {
+          "tlsEnable": false,
+          "organization": "retailerMSP",
+          "channel": "commonchannel",
+          "credentialStore": {
+            "path": "./tmp/credentialStore_Org4/credential",
+            "cryptoStore": {
+              "path": "./tmp/credentialStore_Org4/crypto"
+            }
+          }
+        },
+        "client-5": {
+          "tlsEnable": false,
+          "organization": "regulatorMSP",
+          "channel": "commonchannel",
+          "credentialStore": {
+            "path": "./tmp/credentialStore_Org5/credential",
+            "cryptoStore": {
+              "path": "./tmp/credentialStore_Org5/crypto"
+            }
+          }
+        }
+      },
+      "channels": {
+        "commonchannel": {
+          "peers": {
+            "peer0.vendor.in.swastha.com": {},
+            "peer0.manufacture.in.swastha.com": {},
+            "peer0.distributor.in.swastha.com": {},
+            "peer0.retailer.in.swastha.com": {},
+            "peer0.regulator.in.swastha.com": {}
+          },
+          "connection": {
+            "timeout": {
+              "peer": {
+                "endorser": "6000",
+                "eventHub": "6000",
+                "eventReg": "6000"
+              }
+            }
+          }
+        }
+      },
+      "organizations": {
+        "vendorMSP": {
+          "mspid": "vendorMSP",
+          "fullpath": false,
+          "adminPrivateKey": {
+            "path": "/crypto-config/peerOrganizations/vendor.in.swastha.com/users/Admin@vendor.in.swastha.com/msp/keystore"
+          }
+        },
+        "manufactureMSP": {
+          "mspid": "manufactureMSP",
+          "adminPrivateKey": {
+            "path": "/crypto-config/peerOrganizations/manufacture.in.swastha.com/users/Admin@manufacture.in.swastha.com/msp/keystore"
+          }
+        },
+        "distributorMSP": {
+          "mspid": "distributorMSP",
+          "adminPrivateKey": {
+            "path": "/crypto-config/peerOrganizations/distributor.in.swastha.com/users/Admin@distributor.in.swastha.com/msp/keystore"
+          }
+        },
+        "retailerMSP": {
+          "mspid": "retailerMSP",
+          "adminPrivateKey": {
+            "path": "/crypto-config/peerOrganizations/retailer.in.swastha.com/users/Admin@retailer.in.swastha.com/msp/keystore"
+          }
+        },
+        "regulatorMSP": {
+          "mspid": "regulatorMSP",
+          "adminPrivateKey": {
+            "path": "/crypto-config/peerOrganizations/regulator.in.swastha.com/users/Admin@regulator.in.swastha.com/msp/keystore"
+          }
+        },
+        "OrdererMSP": {
+          "mspid": "OrdererMSP",
+          "adminPrivateKey": {
+            "path": "/crypto-config/ordererOrganizations/in.swastha.com/users/Admin@in.swastha.com/msp/keystore"
+          }
+        }
+      },
+      "peers": {
+        "peer0.vendor.in.swastha.com": {
+          "tlsCACerts": {
+            "path": "/crypto-config/peerOrganizations/vendor.in.swastha.com/peers/peer0.vendor.in.swastha.com/tls/ca.crt"
+          },
+          "url": "grpc://localhost:1051",
+          "eventUrl": "grpcs://localhost:1053"
+        },
+        "peer0.manufacture.in.swastha.com": {
+          "tlsCACerts": {
+            "path": "/crypto-config/peerOrganizations/manufacture.in.swastha.com/peers/peer0.manufacture.in.swastha.com/tls/ca.crt"
+          },
+          "url": "grpc://localhost:2051",
+          "eventUrl": "grpcs://localhost:2053"
+        },
+        "peer0.distributor.in.swastha.com": {
+          "tlsCACerts": {
+            "path": "/crypto-config/peerOrganizations/distributor.in.swastha.com/peers/peer0.distributor.in.swastha.com/tls/ca.crt"
+          },
+          "url": "grpc://localhost:3051",
+          "eventUrl": "grpcs://localhost:3053"
+        },
+        "peer0.retailer.in.swastha.com": {
+          "tlsCACerts": {
+            "path": "/crypto-config/peerOrganizations/retailer.in.swastha.com/peers/peer0.retailer.in.swastha.com/tls/ca.crt"
+          },
+          "url": "grpc://localhost:4051",
+          "eventUrl": "grpcs://localhost:4053"
+        },
+        "peer0.regulator.in.swastha.com": {
+          "tlsCACerts": {
+            "path": "/crypto-config/peerOrganizations/regulator.in.swastha.com/peers/peer0.regulator.in.swastha.com/tls/ca.crt"
+          },
+          "url": "grpc://localhost:5051",
+          "eventUrl": "grpcs://localhost:5053"
+        }
+      },
+      "orderers": {
+        "orderer0.in.swastha.com": {
+          "url": "grpc://localhost:7050"
+        },
+        "orderer1.in.swastha.com": {
+          "url": "grpc://localhost:8050"
+        },
+        "orderer2.in.swastha.com": {
+          "url": "grpcs://localhost:9050"
+        }
+      }
+    },
+    "network-2": {}
+  },
+  "configtxgenToolPath": "/fabric-path/fabric-samples/bin",
+  "license": "Apache-2.0"
+}

@@ -1,3 +1,4 @@
 api/node_modules
 api/blockchain_network/node_modules
 chaincode/node_modules
+blockchain-explorer/

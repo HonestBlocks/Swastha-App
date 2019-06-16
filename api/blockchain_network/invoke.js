@@ -1,20 +1,12 @@
 'use strict';
-/*
-* Copyright IBM Corp All Rights Reserved
-*
-* SPDX-License-Identifier: Apache-2.0
-*/
-/*
- * Chaincode Invoke
- */
 
 const Fabric_Client = require('fabric-client');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
 
-var firstnetwork_path = path.resolve('..', '..', 'first-network');
-var org1tlscacert_path = path.resolve(firstnetwork_path, 'crypto-config', 'peerOrganizations', 'org1.example.com', 'tlsca', 'tlsca.org1.example.com-cert.pem');
+var firstnetwork_path = path.resolve('..', '..');
+var org1tlscacert_path = path.resolve(firstnetwork_path, 'crypto-config', 'peerOrganizations', 'vendor.in.swastha.com', 'tlsca', 'tlsca.vendor.in.swastha.com-cert.pem');
 var org1tlscacert = fs.readFileSync(org1tlscacert_path, 'utf8');
 
 invoke();
@@ -29,11 +21,11 @@ async function invoke() {
 
 		// setup the fabric network
 		// -- channel instance to represent the ledger named "mychannel"
-		const channel = fabric_client.newChannel('mychannel');
+		const channel = fabric_client.newChannel('commonchannel');
 		console.log('Created client side object to represent the channel');
 		// -- peer instance to represent a peer on the channel
-		const peer = fabric_client.newPeer('grpcs://localhost:7051', {
-			'ssl-target-name-override': 'peer0.org1.example.com',
+		const peer = fabric_client.newPeer('grpc://localhost:1051', {
+			'ssl-target-name-override': 'peer0.vendor.in.swastha.com',
 			pem: org1tlscacert
 		});
 		console.log('Created client side object to represent the peer');
@@ -81,10 +73,10 @@ async function invoke() {
 		//   'changeCarOwner' - requires 2 args , ex: args: ['CAR10', 'Dave']
 		const proposal_request = {
 			targets: [peer],
-			chaincodeId: 'fabcar',
-			fcn: 'createCar',
-			args: ['CAR12', 'Honda', 'Accord', 'Black', 'Tom'],
-			chainId: 'mychannel',
+			chaincodeId: 'SwasthaContract',
+			fcn: 'initLedger',
+			args: [],
+			chainId: 'commonchannel',
 			txId: tx_id
 		};
 
