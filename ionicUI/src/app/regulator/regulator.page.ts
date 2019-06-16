@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-regulator',
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegulatorPage implements OnInit {
 
-  constructor() { }
+  pages = [
+    {
+      title:'main',
+    url:'/regulator/main'
+    }
+  ];
+  selectedPath = '';
+
+  constructor( private router : Router) {
+    this.router.events.subscribe((event : RouterEvent) => {
+      this.selectedPath = event.url;
+    })
+   }
 
   ngOnInit() {
   }

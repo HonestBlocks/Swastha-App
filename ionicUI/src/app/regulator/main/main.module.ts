@@ -5,19 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegulatorPage } from './regulator.page';
+import { MainPage } from './main.page';
 
 const routes: Routes = [
   {
-    path: 'regulator',
-    component: RegulatorPage,
-    children: [
-      { path: 'main', loadChildren: '../regulator/main/main.module#MainPageModule' },
-    ]
-  },
-  {
-    path : '',
-    redirectTo:'/regulator/main',
+    path: '',
+    component: MainPage
   }
 ];
 
@@ -28,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [RegulatorPage]
+  declarations: [MainPage]
 })
-export class RegulatorPageModule {}
+export class MainPageModule {}

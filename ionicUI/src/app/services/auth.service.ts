@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { EnvService } from './env.service';
+import { HTTP } from '@ionic-native/http/ngx';
 import { User } from '../models/user';
 @Injectable({
   providedIn: 'root'
@@ -14,16 +15,23 @@ export class AuthService {
     private http: HttpClient,
     private storage: NativeStorage,
     private env: EnvService,
+    private nativehttp : HTTP,
   ) { }
-  login(email: String, password: String) {
-    return this.http.post(this.env.API_URL + 'auth/login',
-      {email: email, password: password}
+  login(ename: String, password: String) {
+    console.log(ename)
+    console.log(password)
+    return this.http.post('http://52.224.67.101:5000/api/login',
+      {email: ename , password: password},
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+      
     ).pipe(
       tap(token => {
         this.storage.setItem('token', token)
         .then(
-          () => {
-            console.log('Token Stored');
+          token => {
+            console.log('Token Stored', token);
           },
           error => console.error('Error storing item', error)
         );
@@ -33,33 +41,45 @@ export class AuthService {
       }),
     );
   }
-  register(fName: String, lName: String, email: String, password: String) {
-    return this.http.post(this.env.API_URL + 'auth/register',
-      {fName: fName, lName: lName, email: email, password: password}
+  register(email: String, password: String, name: String, type: String, phoneNO : String) {
+    console.log(email)
+    console.log(password)
+    console.log(name)
+    console.log(type)
+    console.log(phoneNO)
+    return this.http.post('http://52.224.67.101:5000/api/register',
+      {email: email, password: password, name: name, type: type, phoneNO:phoneNO},
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
     )
   }
-  logout() {
-    const headers = new HttpHeaders({
-      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
-    });
-    return this.http.get(this.env.API_URL + 'auth/logout', { headers: headers })
-    .pipe(
-      tap(data => {
-        this.storage.remove("token");
-        this.isLoggedIn = false;
-        delete this.token;
-        return data;
-      })
-    )
-  }
+  // logout() {
+  //   const headers = new HttpHeaders({
+  //     'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+  //   });
+  //   return this.http.get(this.env.API_URL + 'auth/logout', { headers: headers })
+  //   .pipe(
+  //     tap(data => {
+  //       this.storage.remove("token");
+  //       this.isLoggedIn = false;
+  //       delete this.token;
+  //       return data;
+  //     })
+  //   )
+  // }
   user() {
     const headers = new HttpHeaders({
       'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
-    return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
+    
+    
+    return this.http.get<User>('http://52.224.67.101:5000/api', { headers: headers })
     .pipe(
       tap(user => {
-        return user;
+        
+        return  console.log(user);
+       
       })
     )
   }
@@ -69,6 +89,7 @@ export class AuthService {
         this.token = data;
         if(this.token != null) {
           this.isLoggedIn=true;
+          console.log(data)
         } else {
           this.isLoggedIn=false;
         }
@@ -76,7 +97,9 @@ export class AuthService {
       error => {
         this.token = null;
         this.isLoggedIn=false;
+        console.log(error)
       }
     );
   }
-}
+  
+}   
