@@ -1,87 +1,100 @@
-<ion-row>
-  <ion-col>
-    <ion-header>
-      <ion-toolbar style="text-align: center">
-        <ion-title>Add Product</ion-title>
-      </ion-toolbar>
-    </ion-header>
-      <form>
-        <ion-item lines="none">
-          <ion-label position="floating">Product Name</ion-label>
-          <ion-input ngModel type="text" name="pname"></ion-input>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label position="floating">Product Description</ion-label>
-          <ion-textarea ngModel type="text" name="pdescription"></ion-textarea>
-        </ion-item>
-        <ion-item lines="none"> 
-          <ion-label position="floating">Price</ion-label>
-          <ion-input ngModel type="text" name="price"></ion-input>
-          </ion-item>
-        <ion-item lines="none">
-          <ion-label position="floating">Quantitiy</ion-label>
-          <ion-input ngModel type="text" name="quantity"></ion-input>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label>Unit Of Measurement</ion-label>
-          <ion-select placeholder="Unit Of Measurement">
-            <ion-select-option value="k">Kilogram</ion-select-option>
-            <ion-select-option value="l">Litre</ion-select-option>
-            <ion-select-option value="e">Each</ion-select-option>
-          </ion-select>
-        </ion-item>
-      
-        <ion-button type="submit" expand="full" color="primary">Add Material</ion-button>
-      </form>
-      <ion-button expand="full" color="danger">Clear</ion-button>
-  </ion-col>
-  <ion-col>
-    <form>
+<ion-header>
+    <ion-toolbar>
+        <ion-button slot="start">
+            <ion-menu-button>Menu</ion-menu-button>
+          </ion-button>
+      <ion-title>po</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
       <ion-row>
           <ion-col>
-              <ion-item lines="none">
-                  <ion-label position="floating">Product Number</ion-label>
+            <ion-header>
+              <ion-toolbar style="text-align: center">
+                <ion-title>Add Product</ion-title>
+              </ion-toolbar>
+            </ion-header>
+              <form>
+                <ion-item lines="none">
+                  <ion-label position="floating">Product Name</ion-label>
                   <ion-input ngModel type="text" name="pname"></ion-input>
-                </ion-item> 
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="floating">Product Description</ion-label>
+                  <ion-textarea ngModel type="text" name="pdescription"></ion-textarea>
+                </ion-item>
+                <ion-item lines="none"> 
+                  <ion-label position="floating">Price</ion-label>
+                  <ion-input ngModel type="text" name="price"></ion-input>
+                  </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="floating">Quantitiy</ion-label>
+                  <ion-input ngModel type="text" name="quantity"></ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-label>Unit Of Measurement</ion-label>
+                  <ion-select placeholder="Unit Of Measurement">
+                    <ion-select-option value="k">Kilogram</ion-select-option>
+                    <ion-select-option value="l">Litre</ion-select-option>
+                    <ion-select-option value="e">Each</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              
+                <ion-button type="submit" expand="full" color="primary">Add Material</ion-button>
+              </form>
+              <ion-button expand="full" color="danger">Clear</ion-button>
           </ion-col>
           <ion-col>
-              <ion-item lines="none">
-                  <ion-label position="floating">Vendor Code</ion-label>
-                  <ion-input ngModel type="text" name="vcode"></ion-input>
-                </ion-item> 
-          </ion-col>
-          <ion-col>
-              <ion-item lines="none">
-                  <ion-label position="floating">Expected Date</ion-label>
-                  <ion-input ngModel type="text" name="edate"></ion-input>
-                </ion-item> 
-          </ion-col>
-      </ion-row>
-      <ion-row align-items: center style="font-size: 100%; font-weight: bold">
-          <ion-col>
-            SR NO.
-          </ion-col>
-          <ion-col>
-            PRODUCT NAME
-          </ion-col>
-          <ion-col>
-            QUANTITY
-          </ion-col>
-            <ion-col>
-              UOM
-            </ion-col>
-            <ion-col>
-              ACTION
+            <form>
+              <ion-row>
+                  <ion-col>
+                      <ion-item lines="none">
+                          <ion-label position="floating">Product Number</ion-label>
+                          <ion-input ngModel type="text" name="pname"></ion-input>
+                        </ion-item> 
+                  </ion-col>
+                  <ion-col>
+                      <ion-item lines="none">
+                          <ion-label position="floating">Vendor Code</ion-label>
+                          <ion-input ngModel type="text" name="vcode"></ion-input>
+                        </ion-item> 
+                  </ion-col>
+                  <ion-col>
+                      <ion-item lines="none">
+                          <ion-label position="floating">Expected Date</ion-label>
+                          <ion-input ngModel type="text" name="edate"></ion-input>
+                        </ion-item> 
+                  </ion-col>
+              </ion-row>
+              <ion-row align-items: center style="font-size: 100%; font-weight: bold">
+                  <ion-col>
+                    SR NO.
+                  </ion-col>
+                  <ion-col>
+                    PRODUCT NAME
+                  </ion-col>
+                  <ion-col>
+                    QUANTITY
+                  </ion-col>
+                    <ion-col>
+                      UOM
+                    </ion-col>
+                    <ion-col>
+                      ACTION
+                    </ion-col>
+                </ion-row>
+              <ion-row>
+                <ion-col>
+                    <ion-button expand="full" color="danger">Clear</ion-button>  
+                </ion-col>
+                <ion-col>
+                    <ion-button type="submit" expand="full" color="primary">Submit</ion-button>   
+                </ion-col>
+              </ion-row>
+              </form>
             </ion-col>
         </ion-row>
-      <ion-row>
-        <ion-col>
-            <ion-button expand="full" color="danger">Clear</ion-button>  
-        </ion-col>
-        <ion-col>
-            <ion-button type="submit" expand="full" color="primary">Submit</ion-button>   
-        </ion-col>
-      </ion-row>
-      </form>
-    </ion-col>
-</ion-row>
+  
+  </ion-content>
+  

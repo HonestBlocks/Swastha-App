@@ -9,8 +9,22 @@ import { DistributorPage } from './distributor.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: DistributorPage
+    path: 'distributor',
+    component: DistributorPage,
+    children: [
+  { path: 'change-so-status', loadChildren: '../distributor/change-so-status/change-so-status.module#ChangeSoStatusPageModule' },
+  { path: 'grn', loadChildren: '../distributor/grn/grn.module#GrnPageModule' },
+  { path: 'packaging', loadChildren: '../distributor/packaging/packaging.module#PackagingPageModule' },
+  { path: 'po', loadChildren: '../distributor/po/po.module#PoPageModule' },
+  { path: 'so', loadChildren: '../distributor/so/so.module#SoPageModule' },
+  { path: 'view-po', loadChildren: '../distributor/view-po/view-po.module#ViewPoPageModule' },
+  { path: 'view-single-po', loadChildren: '../distributor/view-single-po/view-single-po.module#ViewSinglePoPageModule' },
+  { path: 'view-single-so', loadChildren: '../distributor/view-single-so/view-single-so.module#ViewSingleSoPageModule' },
+    ]
+  },
+  {
+    path : '',
+    redirectTo:'/distributor/change-so-status'
   }
 ];
 
