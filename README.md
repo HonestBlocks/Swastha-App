@@ -8,3 +8,4 @@ Due to its inherent transparency, immutability and distributed nature, Blockchai
 Additionally smart contracts can be programmed that automatically execute when compliance conditions are not met, there by alerting the relevant parties in the supply chain.
 
 # Usage
+To Run this Project you need to run script.sh

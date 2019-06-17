@@ -1,6 +1,8 @@
 # configtxgen -profile swastha_network -outputBlock ./network-config/orderer.block
 # configtxgen -profile OneOrgsChannel -outputCreateChannelTx ./network-config/channel.tx -channelID mychannel
 # configtxgen -profile OneOrgsChannel -outputAnchorPeersUpdate ./network-config/Org1MSPanchors.tx -channelID mychannel -asOrg Org1MSP
+export PATH=${PWD}/bin:${PWD}:$PATH
+export FABRIC_CFG_PATH=${PWD}/fabric-config
 docker-compose -f docker/docker-compose-kafka.yml up -d
 docker-compose -f docker/docker-compose-cli.yml up -d
 
