@@ -12,17 +12,16 @@ var Fabric_Client = require('fabric-client');
 var fs = require('fs');
 var path = require('path');
 
-var firstnetwork_path = path.resolve('..', '..', 'first-network');
-var org1tlscacert_path = path.resolve(firstnetwork_path, 'crypto-config', 'peerOrganizations', 'org1.example.com', 'tlsca', 'tlsca.org1.example.com-cert.pem');
+var firstnetwork_path = path.resolve('..', '..', '..');
+var org1tlscacert_path = path.resolve(firstnetwork_path, 'crypto-config', 'peerOrganizations', 'vendor.in.swastha.com', 'tlsca', 'tlsca.vendor.in.swastha.com-cert.pem');
 var org1tlscacert = fs.readFileSync(org1tlscacert_path, 'utf8');
 
 //
 var fabric_client = new Fabric_Client();
 
 // setup the fabric network
-var channel = fabric_client.newChannel('mychannel');
-var peer = fabric_client.newPeer('grpcs://localhost:7051', {
-	'ssl-target-name-override': 'peer0.org1.example.com',
+var channel = fabric_client.newChannel('commonchannel');
+var peer = fabric_client.newPeer('grpc://localhost:1051', {
 	pem: org1tlscacert
 });
 channel.addPeer(peer);
@@ -56,9 +55,9 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	// queryAllCars chaincode function - requires no arguments , ex: args: [''],
 	const request = {
 		//targets : --- letting this default to the peers assigned to the channel
-		chaincodeId: 'fabcar',
-		fcn: 'queryAllCars',
-		args: ['']
+		chaincodeId: 'SwasthaContract',
+		fcn: 'manufacture_view_single_po',
+		args: ['Gaurav', '1231312']
 	};
 
 	// send the query proposal to the peer

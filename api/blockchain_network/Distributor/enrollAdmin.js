@@ -14,8 +14,8 @@ var Fabric_CA_Client = require('fabric-ca-client');
 var fs = require('fs');
 var path = require('path');
 
-var firstnetwork_path = path.resolve('..', '..');
-var org1tlscacert_path = path.resolve(firstnetwork_path, 'crypto-config', 'peerOrganizations', 'vendor.in.swastha.com', 'tlsca', 'tlsca.vendor.in.swastha.com-cert.pem');
+var firstnetwork_path = path.resolve('..', '..', '..');
+var org1tlscacert_path = path.resolve(firstnetwork_path, 'crypto-config', 'peerOrganizations', 'distributor.in.swastha.com', 'tlsca', 'tlsca.distributor.in.swastha.com-cert.pem');
 var org1tlscacert = fs.readFileSync(org1tlscacert_path, 'utf8');
 
 //
@@ -41,7 +41,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
     	verify: false
     };
     // be sure to change the http to https when the CA is running TLS enabled
-    fabric_ca_client = new Fabric_CA_Client('http://localhost:1054', tlsOptions , 'ca.vendor.in.swastha.com', crypto_suite);
+    fabric_ca_client = new Fabric_CA_Client('http://localhost:3054', tlsOptions , 'ca.distributor.in.swastha.com', crypto_suite);
 
     // first check to see if the admin is already enrolled
     return fabric_client.getUserContext('admin', true);
@@ -59,7 +59,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
           console.log('Successfully enrolled admin user "admin"');
           return fabric_client.createUser(
               {username: 'admin',
-                  mspid: 'vendorMSP',
+                  mspid: 'distributorMSP',
                   cryptoContent: { privateKeyPEM: enrollment.key.toBytes(), signedCertPEM: enrollment.certificate }
               });
         }).then((user) => {
