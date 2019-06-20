@@ -10,47 +10,47 @@ export class ManufacturePage implements OnInit {
   pages = [
     {
       title:'change-so-status',
-    url:'/manufacture/change-so-status'
+    url:'/change-so-status'
     },
     {
       title:'create-product',
-      url:'/manufacture/create-product'
+      url:'/create-product'
     },
     {
       title:'grn',
-      url:'/manufacture/grn'
+      url:'/grn'
     },
     {
       title:'packaging',
-      url:'/manufacture/packaging'
+      url:'/packaging'
     },
     {
       title:'Purchase Order',
-      url:'/manufacture/po'
+      url:'/po'
     },
     {
       title:'Quality Check',
-      url:'/manufacture/qc'
+      url:'/qc'
     },
     {
-      title:'so',
-      url:'/manufacture/so'
+      title:'Sales Order',
+      url:'/so'
     },
     {
       title:'View-Purchase-Order',
-      url:'/manufacture/view-po'
+      url:'/view-po'
     },
     {
       title:'view-product',
-      url:'/manufacture/view-product'
+      url:'/view-product'
     },
     {
       title:'view-single-product',
-      url:'/manufacture/view-single-product'
+      url:'/view-single-product'
     },
     {
       title:'view-single-so',
-      url:'/manufacture/view-single-so'
+      url:'/view-single-so'
     },
 
     

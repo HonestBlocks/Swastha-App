@@ -30,18 +30,19 @@ export class RegisterPage implements OnInit {
     return await loginModal.present();
   }
   register(form: NgForm) {
-    this.authService.register(form.value.fName, form.value.lName, form.value.email, form.value.password).subscribe(
+    this.authService.userregister(form.value.email, form.value.password, form.value.name, form.value.type, form.value.phoneNO).subscribe(
       data => {
-        this.authService.login(form.value.email, form.value.password).subscribe(
+        this.authService.userlogin(form.value.email, form.value.password).subscribe(
           data => {
+            console.log(data)
           },
           error => {
             console.log(error);
           },
-          () => {
-            this.dismissRegister();
-            this.navCtrl.navigateRoot('/dashboard');
-          }
+          // () => {
+          //   this.dismissRegister();
+          //   this.navCtrl.navigateRoot('/landing');
+          // }
         );
         this.alertService.presentToast(data['message']);
       },
@@ -52,5 +53,6 @@ export class RegisterPage implements OnInit {
         
       }
     );
+    
   }
 }

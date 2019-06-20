@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path : '',
-    redirectTo:'/manufacture/change-so-status'
+    redirectTo:'change-so-status'
   }
 
 ];

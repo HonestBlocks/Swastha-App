@@ -9,6 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule }    from '@angular/common/http';
 import { HTTP} from '@ionic-native/http/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+// import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+// const JWT_Module_Options: JwtModuleOptions = {
+//   config: {
+  
+//   }
+// };
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -17,6 +24,15 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    // JwtModule,
+    // JwtModule.forRoot(JWT_Module_Options),
+    // JwtModule.forRoot({
+    //   config: {
+    //     tokenGetter: tokenGetter,
+    //     whitelistedDomains: ['example.com'],
+    //     blacklistedRoutes: ['example.com/examplebadroute/']
+    //   }
+    // })
   ],
   providers: [
     StatusBar,

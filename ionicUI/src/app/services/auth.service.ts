@@ -5,18 +5,38 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { EnvService } from './env.service';
 import { HTTP } from '@ionic-native/http/ngx';
 import { User } from '../models/user';
+import * as jwt_decode from "jwt-decode";
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   isLoggedIn = false;
   token:any;
+  private _loginURL="http://52.224.67.101:5000/api/login";
+  private _registerURL="http://52.224.67.101:5000/api/register";
   constructor(
     private http: HttpClient,
     private storage: NativeStorage,
     private env: EnvService,
     private nativehttp : HTTP,
   ) { }
+
+
+
+userlogin(ename : String, password : String) {
+  return this.http.post<any>(this._loginURL, {email : ename , password:password})
+}
+// decodetoken(token){
+//     console.log(newToken);
+//    var decoded=jwt_decode(newToken.token);
+//     console.log(decoded)
+//   }
+userregister(ename: String, password: String, name: String, type: String, phoneNO : String)
+{
+  return this.http.post<any>(this._registerURL, {email: ename, password: password, name: name, type: type, phoneNO:phoneNO})
+}
+
+
   login(ename: String, password: String) {
     console.log(ename)
     console.log(password)
@@ -102,4 +122,4 @@ export class AuthService {
     );
   }
   
-}   
+} 

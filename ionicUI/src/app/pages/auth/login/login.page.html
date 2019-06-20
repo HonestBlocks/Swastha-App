@@ -1,22 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button color="light" (click)="dismissLogin()">Close</ion-button>
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
   <form #form="ngForm" (ngSubmit)="login(form)" method="post">
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="floating">User Name</ion-label>
-      <ion-input ngModel type="email" name="email"></ion-input>
+      <ion-input [(ngModel)]="email" name="email"></ion-input>
     </ion-item>
 
 
 
     
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="floating">Password</ion-label>
-      <ion-input ngModel type="password" name="password"></ion-input>
+      <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
     </ion-item>
   
     <!-- <p text-right>Forgot Password?</p> -->

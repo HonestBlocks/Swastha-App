@@ -5,7 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', loadChildren: './pages/landing/landing.module#LandingPageModule' },
+    { path : '',redirectTo:'/landing',pathMatch:'full'},
+    {path: 'landing', loadChildren: './pages/landing/landing.module#LandingPageModule' },
   // { path: '', loadChildren: './pages/auth/login/login.module#LoginPageModule' },
   // { path: '', loadChildren: './pages/auth/register/register.module#RegisterPageModule' },
   // { path: 'change-so-status', loadChildren: './manufacture/change-so-status/change-so-status.module#ChangeSoStatusPageModule' },
@@ -19,7 +20,7 @@ const routes: Routes = [
   // { path: 'view-single-po', loadChildren: './manufacture/view-single-po/view-single-po.module#ViewSinglePoPageModule' },
   // { path: 'view-single-product', loadChildren: './manufacture/view-single-product/view-single-product.module#ViewSingleProductPageModule' },
   // { path: 'view-single-so', loadChildren: './manufacture/view-single-so/view-single-so.module#ViewSingleSoPageModule' },
-  // { path: '', loadChildren: './manufacture/manufacture.module#ManufacturePageModule' },
+  { path: 'manufacture', loadChildren: './manufacture/manufacture.module#ManufacturePageModule' },
   // { path: 'so', loadChildren: './manufacture/so/so.module#SoPageModule' },
   // { path: '', loadChildren: './admin/admin.module#AdminPageModule' },
   // { path: 'add-regulator', loadChildren: './admin/add-regulator/add-regulator.module#AddRegulatorPageModule' },
