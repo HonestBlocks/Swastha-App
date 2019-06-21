@@ -9,7 +9,7 @@ var firstnetwork_path = path.resolve('..', '..');
 var org1tlscacert_path = path.resolve(firstnetwork_path, 'crypto-config', 'peerOrganizations', 'vendor.in.swastha.com', 'tlsca', 'tlsca.vendor.in.swastha.com-cert.pem');
 var org1tlscacert = fs.readFileSync(org1tlscacert_path, 'utf8');
 
-invoke();
+
 
 async function invoke() {
 	console.log('\n\n --- invoke.js - start');
@@ -24,10 +24,10 @@ async function invoke() {
 		const channel = fabric_client.newChannel('commonchannel');
 		console.log('Created client side object to represent the channel');
 		// -- peer instance to represent a peer on the channel
-		const peer = fabric_client.newPeer('grpc://localhost:1051', {
-			'ssl-target-name-override': 'peer0.vendor.in.swastha.com',
+		const peer = fabric_client.newPeer('grpc://localhost:4051', {
 			pem: org1tlscacert
 		});
+		const orderer = fabric_client.newOrderer('grpc://localhost:7050')
 		console.log('Created client side object to represent the peer');
 
 		// This sample application uses a file based key value stores to hold
@@ -59,7 +59,7 @@ async function invoke() {
 		console.log('\n\nStart invoke processing');
 
 		// Use service discovery to initialize the channel
-		await channel.initialize({ discover: true, asLocalhost: true, target: peer });
+		// await channel.initialize({ discover: true, asLocalhost: true, target: peer });
 		console.log('Used service discovery to initialize the channel');
 
 		// get a transaction id object based on the current user assigned to fabric client
@@ -115,6 +115,7 @@ async function invoke() {
 		// committed.
 
 		const commit_request = {
+			orderer: orderer,
 			proposalResponses: proposalResponses,
 			proposal: proposal
 		};
