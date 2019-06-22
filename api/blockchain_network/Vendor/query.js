@@ -4,7 +4,7 @@ var Fabric_Client = require('fabric-client');
 var fs = require('fs');
 var path = require('path');
 
-var firstnetwork_path = path.resolve('..', '..', '..');
+var firstnetwork_path = path.resolve('..');
 var org1tlscacert_path = path.resolve(firstnetwork_path, 'crypto-config', 'peerOrganizations', 'vendor.in.swastha.com', 'tlsca', 'tlsca.vendor.in.swastha.com-cert.pem');
 var org1tlscacert = fs.readFileSync(org1tlscacert_path, 'utf8');
 
@@ -17,16 +17,19 @@ var peer = fabric_client.newPeer('grpc://localhost:1051', {
 	pem: org1tlscacert
 });
 channel.addPeer(peer);
-
+var store_path = path.join(__dirname, 'hfc-key-store');
 /**
  * Vendor View PO List of Manufactures
  * @param {string} vendor_id ID of Vendor.
  */
 module.exports.vendor_view_po = (async (vendor_id) => {
-	return new Promise((resolve, reject) => {
-		Fabric_Client.newDefaultKeyValueStore({
+	console.log("dcsdcsdc")
+	return new Promise( async (resolve, reject) => {
+		console.log("dcsdcsdc223e23e")
+		await Fabric_Client.newDefaultKeyValueStore({
 			path: store_path
 		}).then((state_store) => {
+			console.log("sdcsdcsdcsd");
 			// assign the store to the fabric client
 			fabric_client.setStateStore(state_store);
 			var crypto_suite = Fabric_Client.newCryptoSuite();
@@ -40,7 +43,7 @@ module.exports.vendor_view_po = (async (vendor_id) => {
 			return fabric_client.getUserContext(vendor_id, true);
 		}).then((user_from_store) => {
 			if (user_from_store && user_from_store.isEnrolled()) {
-
+				console.log("sdcsdcsdc")
 			} else {
 				reject("User Wallet is not created yet");
 			}
@@ -52,9 +55,9 @@ module.exports.vendor_view_po = (async (vendor_id) => {
 
 			return channel.queryByChaincode(request);
 		}).then((query_responses) => {
-
+			console.log(query_responses[0])
 			if (query_responses && query_responses.length == 1) {
-				if (query_responses[0] instanceof Error) {
+				if (query_responses[0] instanceof Error) {					
 					reject(query_responses[0]);
 				} else {
 					resolve(query_responses[0]);

@@ -29,7 +29,7 @@ class SwasthaContract extends Contract {
 
     async vendor_view_po(ctx, vendor_id) {
         console.info('============= START : Vendor View PO ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"vendor_id": {"$eq": "${vendor_id}"}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"vendor_id": {"$eq": "${vendor_id}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -70,7 +70,7 @@ class SwasthaContract extends Contract {
     
     async vendor_view_single_po(ctx, po_no, vendor_id) {
         console.info('============= START : Vendor View Single PO ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"vendor_id": {"$eq": "${vendor_id}"}},{"po_no": {"$eq": "${po_no}"}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"vendor_id": {"$eq": "${vendor_id}"}},{"po_no": {"$eq": "${po_no}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -126,18 +126,19 @@ class SwasthaContract extends Contract {
                     console.log(err);
                     Record = res.value.value.toString('utf8');
                 }
-                allResults.push({
-                    Key,
-                    Record
-                });
+                allResults.push(Record);
             }
             if (res.done) {
                 console.log('end of data');
                 await iterator.close();
-                let newPO = JSON.parse(JSON.stringify(allResults));
-                newPO.status.push(JSON.parse(status));
-                await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(newPO))));
-                return JSON.stringify(newPO);
+                let updatedPO = {}
+                for(var i=0; i <= allResults.length; i++) {
+                    updatedPO = JSON.parse(JSON.stringify(allResults[0]));
+                    updatedPO.timeline.push(JSON.parse(status));
+                    await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(updatedPO))));
+                }
+
+                return JSON.stringify(updatedPO);
             }
         }  
      }

@@ -14,6 +14,7 @@ let distributorRoute = require('./routes/distributorRoute');
 let retailerRoute = require('./routes/RetailerRoute');
 let regulatorRoute = require('./routes/regulatorRoute');
 
+let authMiddleware = require('./middleware/authMiddleware')
 
 let vendorRegisterUser = require('./blockchain_network/Vendor/registerUser');
 let distributorRegisterUser = require('./blockchain_network/Distributor/registerUser');
@@ -112,11 +113,11 @@ app.post('/api/admin/register', async (req, res) =>{
 });
 
 //Using all Routes
-app.use('/api/vendor', vendorRoute);
-app.use('/api/manufacture', manufactureRoute);
-app.use('/api/retailer', retailerRoute);
-app.use('/api/distributor', distributorRoute);
-app.use('/api/regulator', regulatorRoute);
+app.use('/api/vendor', authMiddleware, vendorRoute);
+app.use('/api/manufacture', authMiddleware, manufactureRoute);
+app.use('/api/retailer', authMiddleware, retailerRoute);
+app.use('/api/distributor',authMiddleware, distributorRoute);
+app.use('/api/regulator',authMiddleware, regulatorRoute);
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log(`App is running at ${process.env.SERVER_PORT}`)
