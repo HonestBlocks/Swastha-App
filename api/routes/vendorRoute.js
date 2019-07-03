@@ -12,6 +12,7 @@ Router.get('/vendor_view_po', (req, res) => {
     let vendor_id = req.id;
     console.log(vendor_id)
     vendorQuery.vendor_view_po(vendor_id).then((result) => {
+        //console.log(result.toString("utf8"))
         let nR = result.toString("utf8")
         res.status(200).json({msg: JSON.parse(JSON.parse(nR))}).end()
     }).catch(err => {

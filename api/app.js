@@ -100,7 +100,7 @@ app.post('/api/admin/register', async (req, res) =>{
                             res.status(500).json({msg : JSON.stringify(err)}).end();
                         });
                     } else {    
-
+                        res.sendStatus(404).json({msg: "NO SUCH TYPE EXIST"})
                     }
                 }
             });

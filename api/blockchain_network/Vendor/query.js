@@ -24,6 +24,7 @@ var store_path = path.join(__dirname, 'hfc-key-store');
  */
 module.exports.vendor_view_po = (async (vendor_id) => {
 	console.log("dcsdcsdc")
+	// taking vendorid as param
 	return new Promise( async (resolve, reject) => {
 		console.log("dcsdcsdc223e23e")
 		await Fabric_Client.newDefaultKeyValueStore({
@@ -52,7 +53,6 @@ module.exports.vendor_view_po = (async (vendor_id) => {
 				fcn: 'vendor_view_po',
 				args: [vendor_id]
 			};
-
 			return channel.queryByChaincode(request);
 		}).then((query_responses) => {
 			console.log(query_responses[0])
