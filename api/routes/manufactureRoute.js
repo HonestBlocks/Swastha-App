@@ -22,8 +22,9 @@ Router.post('/manufacture_generate_po', (req, res) => {
 });
 
 Router.get('/get_all_po', (req, res) => {
-    manufacture_id = req.id
+    manufacture_id = req.id;
     manufactureQuery.get_all_po(manufacture_id).then((result) => {
+        console.log('HEYY')
         res.status(200).json({msg : result}).end();
     }).catch(err => {
         res.status(500).json({msg : err}).end();

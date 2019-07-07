@@ -164,7 +164,7 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_view_po(ctx, created_by) {
-        console.info('============= START : Manufacture View Their OWN PO ===========');
+        console.log('============= START : Manufacture View Their OWN PO ===========');
         console.info('============= START : Manufacture View Their OWN PO ---- 1 ===========');
         const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"created_by": {"$eq": "${created_by}"}}]}}`);
         console.log(iterator);

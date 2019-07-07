@@ -41,6 +41,7 @@ module.exports.vendor_view_po = (async (vendor_id) => {
 			});
 			crypto_suite.setCryptoKeyStore(crypto_store);
 			fabric_client.setCryptoSuite(crypto_suite);
+			console.log(fabric_client.getUserContext(vendor_id, true))
 			return fabric_client.getUserContext(vendor_id, true);
 		}).then((user_from_store) => {
 			if (user_from_store && user_from_store.isEnrolled()) {
