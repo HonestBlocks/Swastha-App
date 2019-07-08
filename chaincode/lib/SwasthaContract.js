@@ -423,7 +423,7 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_do_boxing(ctx, created_by, batch_no, box_no, newOwner) {
-        console.info('============= START : Manifacture Do Packaging of Product ===========');
+        console.info('============= START : Manufacture Do Packaging of Product ===========');
         const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}},{"batch_no": {"$eq": ${batch_no}}}]}`);
         const allResults = [];
         while (true) {

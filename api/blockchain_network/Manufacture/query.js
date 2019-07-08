@@ -436,3 +436,139 @@ module.exports.manufacture_view_single_product = (async (manufacture_id, serial_
 
 	});
 });
+
+
+/**
+     * Manfacture view Purchase Order List of Distributor.
+     * @param {string} manufacture_id Manufacture Unique ID.
+     */
+
+	module.exports.manufacture_view_po_of_distributor = (async (manufacture_id) => {
+		// taking manufacture_id as param
+		// returns a promise
+		console.log (typeof(manufacture_id))
+		return new Promise( async (resolve, reject) => {
+			console.log('Fi');
+			await Fabric_Client.newDefaultKeyValueStore({
+				path: store_path
+			}).then((state_store) => {
+				// assign the store to fabric client
+				console.log(state_store);
+				fabric_client.setStateStore(state_store);
+				var crypto_suite = Fabric_Client.newCryptoSuite();
+	
+				// use  the same location for the state store(where user's certificate is kept )
+				// and the crypto store (where users' keys are kept)
+				var crypto_store = Fabric_Client.newCryptoKeyStore({
+					path: store_path
+				});
+	
+				crypto_suite.setCryptoKeyStore(crypto_store);
+				fabric_client.setCryptoSuite(crypto_suite);
+				console.log(fabric_client.getUserContext(manufacture_id, true))
+				return fabric_client.getUserContext(manufacture_id, true);
+			})
+			.then((user_from_store) => {
+				console.log('F12');
+				if (user_from_store && user_from_store.isEnrolled()) {
+					console.log('Enrolled User')
+				} else{
+					reject("User Wallet is not created yet");
+				}
+	
+				const request = {
+					chaincodeId: 'SwasthaContract',
+					fcn: 'manufacture_view_po_of_distributor',
+					args: [manufacture_id]
+				};
+				// console.log(request);
+				return channel.queryByChaincode(request);
+			})
+			.then( (query_responses) => {
+				console.log('ress');
+				console.log(query_responses);
+				console.log(query_responses[0]);
+				if (query_responses && query_responses.length ==1) {
+					if(query_responses[0] instanceof Error){
+						reject(query_responses[0]);
+					}
+					else{
+						resolve(query_responses[0]);
+					}
+				}
+				else{
+					reject ("No payload return from network");
+				}
+			})
+			.catch( (err) => {reject(err);});
+	
+		});
+});
+	
+/** 
+ * @param {string} manufacture_id Manufacture Unique ID.
+ * @param {string} po_no Purchase Order No.
+ * */
+
+module.exports.manufacture_view_single_po_of_distributor = (async (manufacture_id, po_no) => {
+	// taking manufacture_id as param
+	// returns a promise
+	console.log (typeof(manufacture_id))
+	return new Promise( async (resolve, reject) => {
+		console.log('Fi');
+		await Fabric_Client.newDefaultKeyValueStore({
+			path: store_path
+		}).then((state_store) => {
+			// assign the store to fabric client
+			console.log(state_store);
+			fabric_client.setStateStore(state_store);
+			var crypto_suite = Fabric_Client.newCryptoSuite();
+
+			// use  the same location for the state store(where user's certificate is kept )
+			// and the crypto store (where users' keys are kept)
+			var crypto_store = Fabric_Client.newCryptoKeyStore({
+				path: store_path
+			});
+
+			crypto_suite.setCryptoKeyStore(crypto_store);
+			fabric_client.setCryptoSuite(crypto_suite);
+			console.log(fabric_client.getUserContext(manufacture_id, true))
+			return fabric_client.getUserContext(manufacture_id, true);
+		})
+		.then((user_from_store) => {
+			console.log('F12');
+			if (user_from_store && user_from_store.isEnrolled()) {
+				console.log('Enrolled User')
+			} else{
+				reject("User Wallet is not created yet");
+			}
+
+			const request = {
+				chaincodeId: 'SwasthaContract',
+				fcn: 'manufacture_view_single_po_of_distributor',
+				args: [manufacture_id,po_no]
+			};
+			// console.log(request);
+			return channel.queryByChaincode(request);
+		})
+		.then( (query_responses) => {
+			console.log('ress');
+			console.log(query_responses);
+			console.log(query_responses[0]);
+			if (query_responses && query_responses.length ==1) {
+				if(query_responses[0] instanceof Error){
+					reject(query_responses[0]);
+				}
+				else{
+					resolve(query_responses[0]);
+				}
+			}
+			else{
+				reject ("No payload return from network");
+			}
+		})
+		.catch( (err) => {reject(err);});
+
+	});
+});
+

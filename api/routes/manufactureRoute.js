@@ -96,6 +96,28 @@ Router.get('/view_product/:serial_no', (req, res) => {
     })
 });
 
+Router.get('/view_po_distributor', (req, res) => {
+    let manufacture_id = req.id;
+    manufactureQuery.manufacture_view_po_of_distributor(manufacture_id).then((result) => {
+        console.log('HEYY')
+        res.status(200).json({msg : result}).end();
+    }).catch(err => {
+        res.status(500).json({msg : err}).end();
+    })
+});
+
+
+Router.get('/view_po_distributor/:po_no', (req, res) => {
+    let manufacture_id = req.id;
+    let po_no = req.params.po_no
+    manufactureQuery.manufacture_view_single_po_of_distributor(manufacture_id, po_no).then((result) => {
+        console.log('HEYY')
+        res.status(200).json({msg : result}).end();
+    }).catch(err => {
+        res.status(500).json({msg : err}).end();
+    })
+});
+
 
 
 
