@@ -164,7 +164,7 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_view_po(ctx, created_by) {
-        console.info('============= START : Manufacture View Their OWN PO ===========');
+        console.log('============= START : Manufacture View Their OWN PO ===========');
         console.info('============= START : Manufacture View Their OWN PO ---- 1 ===========');
         const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"created_by": {"$eq": "${created_by}"}}]}}`);
         console.log(iterator);
@@ -423,7 +423,7 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_do_boxing(ctx, created_by, batch_no, box_no, newOwner) {
-        console.info('============= START : Manifacture Do Packaging of Product ===========');
+        console.info('============= START : Manufacture Do Packaging of Product ===========');
         const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}},{"batch_no": {"$eq": ${batch_no}}}]}`);
         const allResults = [];
         while (true) {
