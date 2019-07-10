@@ -21,6 +21,24 @@ Router.post('/manufacture_generate_po', (req, res) => {
     });
 });
 
+Router.post('/create_product', (req,res) => {
+    let manufacture_id = req.id;
+    let body = _.pick(req.body, ['product_name', 'product_description', 'Material', 'mftDate', 'ExpiryDate', 'serial_no', 'batch_no'])
+    body['created_by'] = manufacture_id
+    body['timeline'] = []
+    body.timeline.push({msg : "Product Created", date : Date.now(), updated_by : manufacture_id});
+    body['created_at'] = Date.now()
+    body['token'] = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    console.log(body) 
+    manufactureInvoke.manufacture_create_product(body, manufacture_id).then((result) => {
+        res.status(200).json({msg:result}).end();
+    }).catch(err => {
+        res.status(500).json({msg:err}).end();
+    });
+    
+});
+
+
 Router.get('/get_all_po', (req, res) => {
     let manufacture_id = req.id;
     manufactureQuery.get_all_po(manufacture_id).then((result) => {
@@ -30,6 +48,7 @@ Router.get('/get_all_po', (req, res) => {
         res.status(500).json({msg : err}).end();
     })
 });
+
 
 Router.get('/get_po/:po_no', (req, res) => {
     let po_no = req.params.po_no;
@@ -42,6 +61,8 @@ Router.get('/get_po/:po_no', (req, res) => {
     })
 })
 
+
+// ***
 Router.get('/quality_check/:po_no', (req, res) => {
     let po_no = req.params.po_no;
     let manufacture_id =  req.id;
@@ -52,10 +73,10 @@ Router.get('/quality_check/:po_no', (req, res) => {
         res.status(200).json({msg:result}).end();
     }).catch( (err) => {
         res.status(500).json({msg:err}).end();
-
     })
 })
 
+// **** - to be tested
 Router.get('/goods_recv_status/:po_no', (req, res) => {
     let po_no = req.params.po_no;
     let manufacture_id =  req.id;

@@ -344,12 +344,13 @@ module.exports.manufacture_view_product = (async (manufacture_id) => {
 				fcn: 'manufacture_view_product',
 				args: [manufacture_id]
 			};
+			const newLocal = channel.queryByChaincode(request);
 			// console.log(request);
-			return channel.queryByChaincode(request);
+			return newLocal;
 		})
 		.then( (query_responses) => {
 			console.log('ress');
-			console.log(query_responses);
+			console.log(query_responses.length);
 			console.log(query_responses[0]);
 			if (query_responses && query_responses.length ==1) {
 				if(query_responses[0] instanceof Error){
@@ -363,7 +364,7 @@ module.exports.manufacture_view_product = (async (manufacture_id) => {
 				reject ("No payload return from network");
 			}
 		})
-		.catch( (err) => {reject(err);});
+		.catch( (err) => {reject(err)});
 
 	});
 });
@@ -571,4 +572,8 @@ module.exports.manufacture_view_single_po_of_distributor = (async (manufacture_i
 
 	});
 });
+
+// manufacture_change_po_status_of_distributor
+// manufacture_do_boxing
+// manufacture_create_product
 
