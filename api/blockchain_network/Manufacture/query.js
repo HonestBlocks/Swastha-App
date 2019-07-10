@@ -344,9 +344,8 @@ module.exports.manufacture_view_product = (async (manufacture_id) => {
 				fcn: 'manufacture_view_product',
 				args: [manufacture_id]
 			};
-			const newLocal = channel.queryByChaincode(request);
 			// console.log(request);
-			return newLocal;
+			return channel.queryByChaincode(request);
 		})
 		.then( (query_responses) => {
 			console.log('ress');
