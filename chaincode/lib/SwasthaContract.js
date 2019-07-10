@@ -164,7 +164,7 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_view_po(ctx, created_by) {
-        console.log('============= START : Manufacture View Their OWN PO ===========');
+        console.info('============= START : Manufacture View Their OWN PO ===========');
         console.info('============= START : Manufacture View Their OWN PO ---- 1 ===========');
         const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"created_by": {"$eq": "${created_by}"}}]}}`);
         console.log(iterator);
@@ -249,7 +249,7 @@ class SwasthaContract extends Contract {
 
     async manufacture_do_qc(ctx, created_by, po_no, qualityCheck) {
         console.info('============= START : Manufacture Do Quality Check ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"created_by": {"$eq": "${created_by}"}},{"po_no": {"$eq": "${po_no}"}}]}"`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"created_by": {"$eq": "${created_by}"}},{"po_no": {"$eq": "${po_no}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -291,7 +291,7 @@ class SwasthaContract extends Contract {
 
     async manufacture_do_grn(ctx, created_by, po_no, grn_status) {
         console.info('============= START : Manifacture Do GRN of Material ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"created_by": {"$eq": "${created_by}"}},{"po_no": {"$eq": "${po_no}"}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"created_by": {"$eq": "${created_by}"}},{"po_no": {"$eq": "${po_no}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -345,7 +345,7 @@ class SwasthaContract extends Contract {
 
     async manufacture_view_product(ctx, created_by) {
         console.info('============= START : Manufacture View Product List ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -384,7 +384,7 @@ class SwasthaContract extends Contract {
 
     async manufacture_view_single_product(ctx, created_by, serial_no) {
         console.info('============= START : Manufacture View Single Product ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"created_by": {"$eq": "${created_by}"}},{"serial_no": {"$eq": ${serial_no}}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}},{"serial_no": {"$eq": "${serial_no}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -423,8 +423,8 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_do_boxing(ctx, created_by, batch_no, box_no, newOwner) {
-        console.info('============= START : Manufacture Do Packaging of Product ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}},{"batch_no": {"$eq": ${batch_no}}}]}`);
+        console.info('============= START : Manifacture Do Packaging of Product ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}},{"batch_no": {"$eq": "${batch_no}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -467,7 +467,7 @@ class SwasthaContract extends Contract {
 
     async manufacture_view_po_of_distributor(ctx, manufacture_id) {
         console.info('============= START : Manufacture View Distributor Purchase Order ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "distributor_po"},{"manufacture_id": {"$eq": ${manufacture_id}}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "distributor_po"},{"manufacture_id": {"$eq": "${manufacture_id}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -506,7 +506,7 @@ class SwasthaContract extends Contract {
 
     async manufacture_view_single_po_of_distributor(ctx, manufacture_id, po_no) {
         console.info('============= START : Manufacture View Distributor Po by Po_no ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "distributor_po"},{"manufacture": {"$eq": ${manufacture_id}}},{"po_no": {"$eq": "${po_no}"}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "distributor_po"},{"manufacture_id": {"$eq": "${manufacture_id}"}},{"po_no": {"$eq": "${po_no}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -547,7 +547,7 @@ class SwasthaContract extends Contract {
 
     async manufacture_change_po_status_of_distributor(ctx, manufacture_id, po_no, status) {
         console.info('============= START : Vendor Change PO Status ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "distributor_po"},{"manufacture_id": {"$eq": ${manufacture_id}}},{"po_no": {"$eq": "${po_no}"}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "distributor_po"},{"manufacture_id": {"$eq": "${manufacture_id}"}},{"po_no": {"$eq": "${po_no}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -587,6 +587,7 @@ class SwasthaContract extends Contract {
 
     async regulator_search_product_using_raw_material(ctx, material_code) {
         // TODO: CoachDB Index Searching
+
     }
 
     /**
@@ -598,6 +599,35 @@ class SwasthaContract extends Contract {
 
     async regulator_search_product_by_serial_no_batch_no(ctx, serial_no, batch_no) {
         // TODO: CoachDB Index Searching
+        console.info('============= START : Manufacture View Product List ===========');
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"serial_no": {"$eq": "${serial_no}"}},{"batch_no": {"$eq": "${batch_no}"}}]}}`);
+        const allResults = [];
+        while (true) {
+            const res = await iterator.next();
+
+            if (res.value && res.value.value.toString()) {
+                console.log(res.value.value.toString('utf8'));
+
+                const Key = res.value.key;
+                let Record;
+                try {
+                    Record = JSON.parse(res.value.value.toString('utf8'));
+                } catch (err) {
+                    console.log(err);
+                    Record = res.value.value.toString('utf8');
+                }
+                allResults.push({
+                    Key,
+                    Record
+                });
+            }
+            if (res.done) {
+                console.log('end of data');
+                await iterator.close();
+                console.info(allResults);
+                return JSON.stringify(allResults);
+            }
+        }   
     }
 
 
