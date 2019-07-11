@@ -345,7 +345,7 @@ class SwasthaContract extends Contract {
 
     async manufacture_view_product(ctx, created_by) {
         console.info('============= START : Manufacture View Product List ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"manufacture_id": {"$eq": "${created_by}"}}]}}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
