@@ -9,3 +9,6 @@ Additionally smart contracts can be programmed that automatically execute when c
 
 # Usage
 To Run this Project you need to run script.sh
+
+# Transaction Flow
+![alt text](https://raw.githubusercontent.com/HonestBlocks/Swastha-App/master/Transaction_flow.png)
