@@ -110,7 +110,7 @@ class SwasthaContract extends Contract {
 
      async vendor_change_po_status(ctx, po_no, vendor_id, status) {
         console.info('============= START : Vendor Change PO Status ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"vendor_id": {"$eq": "${vendor_id}"}},{"po_no": {"$eq": "${po_no}"}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"vendor_id": {"$eq": "${vendor_id}"}},{"po_no": {"$eq": "${po_no}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -137,7 +137,6 @@ class SwasthaContract extends Contract {
                     updatedPO.timeline.push(JSON.parse(status));
                     await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(updatedPO))));
                 }
-
                 return JSON.stringify(updatedPO);
             }
         }  
@@ -423,6 +422,7 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_do_boxing(ctx, created_by, batch_no, box_no, newOwner) {
+        console.log('Herer'+ created_by);
         console.info('============= START : Manifacture Do Packaging of Product ===========');
         const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}},{"batch_no": {"$eq": "${batch_no}"}}]}}`);
         const allResults = [];

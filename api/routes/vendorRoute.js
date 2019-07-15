@@ -22,6 +22,7 @@ Router.get('/vendor_view_po', (req, res) => {
 
 
 Router.get('/vendor_view_single_po', (req, res) => {
+    // TODO : Make po_no seperate for each manufacturer
     let body = _.pick(req.body, ['po_no']);
     let vendor_id = req.id;
     vendorQuery.vendor_view_single_po(body.po_no, vendor_id).then((result) => {
@@ -33,11 +34,14 @@ Router.get('/vendor_view_single_po', (req, res) => {
     });
 });
 
+
+// To Be Corrected
 Router.post('/vendor_change_po_status', (req, res) => {
     let body = _.pick(req.body, ['po_no', 'status']);
     let status = {}
     status["data"] = Date.now(),
     status["current_status"] = body.status
+    status['docType'] = 'manufacture_po'
     let vendor_id = req.id;
     vendorInvoke.vendor_change_po_status(body.po_no,vendor_id, JSON.stringify(status)).then((result) => {
         res.status(200).json({msg: result}).end()

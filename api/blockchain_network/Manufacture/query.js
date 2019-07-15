@@ -167,8 +167,6 @@ module.exports.get_po_by_po = (async (manufacture_id, po_no) => {
  */
 
  module.exports.manufacture_do_qc = (async (manufacture_id,qualityCheck ,po_no) => {
-	// taking manufacture_id as param
-	// returns a promise
 	console.log("oiioioioioi");
 	console.log (typeof(manufacture_id,po_no, qualityCheck))
 	return new Promise( async (resolve, reject) => {
@@ -356,7 +354,7 @@ module.exports.manufacture_view_product = (async (manufacture_id) => {
 					reject(query_responses[0]);
 				}
 				else{
-					resolve(query_responses[0]);
+					resolve(query_responses[0].toString('utf8'));
 				}
 			}
 			else{
