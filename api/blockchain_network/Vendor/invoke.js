@@ -63,7 +63,9 @@ module.exports.vendor_change_po_status = (async (po_no, vendor_id, status) => {
 	
 			const tx_id = fabric_client.newTransactionID();
 			console.log(util.format("\nCreated a transaction ID: %s", tx_id.getTransactionID()));
-
+			
+			// console.log(po_no, vendor_id, status, peer);
+			// console.log(typeof(po_no), typeof(vendor_id), typeof(status), typeof([peer]));
 			const proposal_request = {
 				targets: [peer],
 				chaincodeId: 'SwasthaContract',
@@ -72,9 +74,8 @@ module.exports.vendor_change_po_status = (async (po_no, vendor_id, status) => {
 				chainId: 'commonchannel',
 				txId: tx_id
 			};
-	
 			const endorsement_results = await channel.sendTransactionProposal(proposal_request);
-	
+			console.log(endorsement_results)
 			const proposalResponses = endorsement_results[0];
 			const proposal = endorsement_results[1];
 	

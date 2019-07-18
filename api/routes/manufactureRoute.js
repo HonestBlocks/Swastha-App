@@ -26,7 +26,6 @@ Router.post('/manufacture_generate_po', (req, res) => {
 Router.post('/packaging_by_manufacture', (req,res) => {
     let manufacture_id = req.id;
     let body = _.pick(req.body, ['batch_no', 'box_no', 'new_owner']);
-    body['docType'] = 'product';
     manufactureInvoke.manufacture_do_boxing(manufacture_id, body).then(result => {
         res.status(200).json({msg:result}).end();
     }).catch(err => {
@@ -36,10 +35,10 @@ Router.post('/packaging_by_manufacture', (req,res) => {
 
 
 // ***
-Router.get('/quality_check/:po_no', (req, res) => {
+Router.post('/quality_check/:po_no', (req, res) => {
     let po_no = req.params.po_no;
     let manufacture_id =  req.id;
-    let qualityCheck = JSON.stringify(req.body.qualityCheck);
+    let qualityCheck = req.body.qualityCheck;
     console.log(po_no, qualityCheck)
     manufactureQuery.manufacture_do_qc(manufacture_id, qualityCheck ,po_no).then((result) => {
         console.log("completed");
@@ -51,17 +50,16 @@ Router.get('/quality_check/:po_no', (req, res) => {
 
 
 // **** - to be tested
-Router.get('/goods_recv_status/:po_no', (req, res) => {
+Router.post('/goods_recv_status/:po_no', (req, res) => {
     let po_no = req.params.po_no;
     let manufacture_id =  req.id;
-    let grn_status = JSON.stringify(req.body.grn_status);
+    let grn_status = req.body.grn_status;
     console.log(po_no, grn_status)
-    manufactureQuery.manufacture_do_qc(manufacture_id,po_no, grn_status).then((result) => {
+    manufactureQuery.manufacture_grn(manufacture_id,po_no, grn_status).then((result) => {
         console.log("completed");
         res.status(200).json({msg:result}).end();
     }).catch( (err) => {
         res.status(500).json({msg:err}).end();
-
     })
 })
 

@@ -28,9 +28,16 @@ docker exec -it cli.regulator.in.swastha.com peer chaincode install -l node -n S
 
 
 docker exec -it cli.vendor.in.swastha.com peer chaincode instantiate -o orderer0.in.swastha.com:7050 -C commonchannel -n SwasthaContract /opt/gopath/src/github.com/chaincode SwasthaContract  -v v0 -c '{"Args": ["initLedger"]}'
-# docker exec -it cli.manufacture.in.swastha.com peer chaincode instantiate -o orderer0.in.swastha.com:7050 -C commonchannel -n SwasthaContract /opt/gopath/src/github.com/chaincode SwasthaContract  -v v0 -c '{"Args": ["initLedger"]}'
-# docker exec -it cli.distributor.in.swastha.com peer chaincode instantiate -o orderer0.in.swastha.com:7050 -C commonchannel -n SwasthaContract /opt/gopath/src/github.com/chaincode SwasthaContract  -v v0 -c '{"Args": ["initLedger"]}'
-# docker exec -it cli.retailer.in.swastha.com peer chaincode instantiate -o orderer0.in.swastha.com:7050 -C commonchannel -n SwasthaContract /opt/gopath/src/github.com/chaincode SwasthaContract  -v v0 -c '{"Args": ["initLedger"]}'
-# docker exec -it cli.regulator.in.swastha.com peer chaincode instantiate -o orderer0.in.swastha.com:7050 -C commonchannel -n SwasthaContract /opt/gopath/src/github.com/chaincode SwasthaContract  -v v0 -c '{"Args": ["initLedger"]}'
+docker exec -it cli.manufacture.in.swastha.com peer chaincode instantiate -o orderer0.in.swastha.com:7050 -C commonchannel -n SwasthaContract /opt/gopath/src/github.com/chaincode SwasthaContract  -v v0 -c '{"Args": ["initLedger"]}'
+docker exec -it cli.distributor.in.swastha.com peer chaincode instantiate -o orderer0.in.swastha.com:7050 -C commonchannel -n SwasthaContract /opt/gopath/src/github.com/chaincode SwasthaContract  -v v0 -c '{"Args": ["initLedger"]}'
+docker exec -it cli.retailer.in.swastha.com peer chaincode instantiate -o orderer0.in.swastha.com:7050 -C commonchannel -n SwasthaContract /opt/gopath/src/github.com/chaincode SwasthaContract  -v v0 -c '{"Args": ["initLedger"]}'
+docker exec -it cli.regulator.in.swastha.com peer chaincode instantiate -o orderer0.in.swastha.com:7050 -C commonchannel -n SwasthaContract /opt/gopath/src/github.com/chaincode SwasthaContract  -v v0 -c '{"Args": ["initLedger"]}'
 
 # docker exec -it cli.manufacture.in.swastha.com peer chaincode invoke -o orderer0.in.swastha.com:7050 -n SwasthaContract -c '{"Args":["manufacture_generate_po", "{\"po_no\":\"1231312\", \"docType\":\"manufacture_po\", \"created_by\":\"Gaurav\"}"]}' -C commonchannel
+rm api/blockchain_network/Vendor/hfc-key-store -r
+rm api/blockchain_network/Manufacture/hfc-key-store -r
+# rm api/blockchain_network/Distributor/hfc-key-store -r
+#rm api/blockchain_network/Retailer/hfc-key-store -r
+
+#cd apinode ./api/blockchain_network/Vendor/enrollAdmin.js
+#node ./api/blockchain_network/Manufacture/enrollAdmin.js

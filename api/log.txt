@@ -1,0 +1,166 @@
+
+> swastha-contract@1.0.0 start /usr/local/src
+> fabric-chaincode-node start "--peer.address" "peer0.vendor.in.swastha.com:7052"
+
+2019-07-15T20:40:22.218Z [32minfo[39m [contracts-spi/bootstrap.js]                        [32minfo[39m: No metadata file supplied in contract, introspection will generate all the data {"timestamp":"2019-07-15T20:40:22.218Z"}
+2019-07-15T20:40:22.221Z [32minfo[39m [contracts-spi/chaincodefromcontract.js]            [32minfo[39m: Using serializers {"transaction":"jsonSerializer","serializers":{},"timestamp":"2019-07-15T20:40:22.221Z"}
+2019-07-15T20:40:22.279Z [32minfo[39m [lib/chaincode.js]                                  [32minfo[39m: Registering with peer peer0.vendor.in.swastha.com:7052 as chaincode "SwasthaContract:v0" {"timestamp":"2019-07-15T20:40:22.279Z"}
+
+Command succeeded
+
+2019-07-15T20:40:22.318Z [32minfo[39m [lib/handler.js]                                    [32minfo[39m: Successfully registered with peer node. State transferred to "established" {"timestamp":"2019-07-15T20:40:22.318Z"}
+2019-07-15T20:40:22.319Z [32minfo[39m [lib/handler.js]                                    [32minfo[39m: Successfully established communication with peer node. State transferred to "ready" {"timestamp":"2019-07-15T20:40:22.319Z"}
+============= START : Initialize Ledger ===========
+============= END : Initialize Ledger ===========
+2019-07-15T20:40:22.328Z [32minfo[39m [lib/handler.js]                                    [32minfo[39m: [commonchannel-0e65d9c9] Calling chaincode Init() succeeded. Sending COMPLETED message back to peer {"timestamp":"2019-07-15T20:40:22.328Z"}
+============= START : Vendor View PO ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+[ { Key: 'manufacture1-1',
+    Record: 
+     { Material: [Array],
+       created_by: 'Manufacture1@gmail.com',
+       date: 1563258651566,
+       docType: 'manufacture_po',
+       expectedDate: '10/12/2020',
+       po_no: 'manufacture1-1',
+       timeline: [Array],
+       totalAmt: '2100',
+       tx_ids: [Array],
+       vendor_id: 'Vendor1@gmail.com' } } ]
+2019-07-16T06:40:12.894Z [32minfo[39m [./lib/jsontransactionserializer.js]                [32minfo[39m: [commonchannel-8e4ba571] toBuffer has no schema/lacks sufficient schema to validate against {"timestamp":"2019-07-16T06:40:12.894Z"}
+2019-07-16T06:40:12.895Z [32minfo[39m [lib/handler.js]                                    [32minfo[39m: [commonchannel-8e4ba571] Calling chaincode Invoke() succeeded. Sending COMPLETED message back to peer {"timestamp":"2019-07-16T06:40:12.895Z"}
+============= START : Vendor View Single PO ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+[ { Key: 'manufacture1-1',
+    Record: 
+     { Material: [Array],
+       created_by: 'Manufacture1@gmail.com',
+       date: 1563258651566,
+       docType: 'manufacture_po',
+       expectedDate: '10/12/2020',
+       po_no: 'manufacture1-1',
+       timeline: [Array],
+       totalAmt: '2100',
+       tx_ids: [Array],
+       vendor_id: 'Vendor1@gmail.com' } } ]
+2019-07-16T06:41:35.245Z [32minfo[39m [./lib/jsontransactionserializer.js]                [32minfo[39m: [commonchannel-908ce898] toBuffer has no schema/lacks sufficient schema to validate against {"timestamp":"2019-07-16T06:41:35.245Z"}
+2019-07-16T06:41:35.246Z [32minfo[39m [lib/handler.js]                                    [32minfo[39m: [commonchannel-908ce898] Calling chaincode Invoke() succeeded. Sending COMPLETED message back to peer {"timestamp":"2019-07-16T06:41:35.246Z"}
+============= START : Vendor View Single PO ===========
+end of data
+[]
+2019-07-16T06:41:48.966Z [32minfo[39m [./lib/jsontransactionserializer.js]                [32minfo[39m: [commonchannel-bba573ff] toBuffer has no schema/lacks sufficient schema to validate against {"timestamp":"2019-07-16T06:41:48.966Z"}
+2019-07-16T06:41:48.966Z [32minfo[39m [lib/handler.js]                                    [32minfo[39m: [commonchannel-bba573ff] Calling chaincode Invoke() succeeded. Sending COMPLETED message back to peer {"timestamp":"2019-07-16T06:41:48.966Z"}
+============= START : Vendor View Single PO ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+[ { Key: 'manufacture1-1',
+    Record: 
+     { Material: [Array],
+       created_by: 'Manufacture1@gmail.com',
+       date: 1563258651566,
+       docType: 'manufacture_po',
+       expectedDate: '10/12/2020',
+       po_no: 'manufacture1-1',
+       timeline: [Array],
+       totalAmt: '2100',
+       tx_ids: [Array],
+       vendor_id: 'Vendor1@gmail.com' } } ]
+2019-07-16T06:41:55.045Z [32minfo[39m [./lib/jsontransactionserializer.js]                [32minfo[39m: [commonchannel-cd5eb21d] toBuffer has no schema/lacks sufficient schema to validate against {"timestamp":"2019-07-16T06:41:55.045Z"}
+2019-07-16T06:41:55.046Z [32minfo[39m [lib/handler.js]                                    [32minfo[39m: [commonchannel-cd5eb21d] Calling chaincode Invoke() succeeded. Sending COMPLETED message back to peer {"timestamp":"2019-07-16T06:41:55.046Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T10:09:36.850Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-e2ed4fc1] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T10:09:36.850Z"}
+2019-07-16T10:09:36.851Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-e2ed4fc1] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T10:09:36.851Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T10:09:49.648Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-29c269b0] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T10:09:49.648Z"}
+2019-07-16T10:09:49.649Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-29c269b0] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T10:09:49.649Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T10:10:03.917Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-f6f5f588] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T10:10:03.917Z"}
+2019-07-16T10:10:03.917Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-f6f5f588] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T10:10:03.917Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T10:12:00.081Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-d44c90d1] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T10:12:00.081Z"}
+2019-07-16T10:12:00.081Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-d44c90d1] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T10:12:00.081Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T10:20:26.507Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-bb459e48] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T10:20:26.507Z"}
+2019-07-16T10:20:26.508Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-bb459e48] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T10:20:26.508Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T10:41:41.923Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-a0e21548] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T10:41:41.923Z"}
+2019-07-16T10:41:41.924Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-a0e21548] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T10:41:41.924Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T10:44:02.222Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-31eefffa] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T10:44:02.222Z"}
+2019-07-16T10:44:02.223Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-31eefffa] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T10:44:02.223Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T10:48:02.770Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-faa22fd6] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T10:48:02.770Z"}
+2019-07-16T10:48:02.770Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-faa22fd6] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T10:48:02.770Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T10:56:17.673Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-3ff4b506] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T10:56:17.673Z"}
+2019-07-16T10:56:17.674Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-3ff4b506] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T10:56:17.674Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:05:02.718Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-265088ee] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:05:02.718Z"}
+2019-07-16T11:05:02.719Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-265088ee] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:05:02.719Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:11:55.776Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-234a5e24] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:11:55.776Z"}
+2019-07-16T11:11:55.777Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-234a5e24] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:11:55.777Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:12:17.390Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-9bf30e23] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:12:17.390Z"}
+2019-07-16T11:12:17.391Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-9bf30e23] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:12:17.391Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:20:29.837Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-6aa988ff] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:20:29.837Z"}
+2019-07-16T11:20:29.837Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-6aa988ff] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:20:29.837Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:21:13.366Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-cbd0bb4e] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:21:13.366Z"}
+2019-07-16T11:21:13.367Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-cbd0bb4e] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:21:13.367Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:21:27.443Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-636dee9a] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:21:27.443Z"}
+2019-07-16T11:21:27.443Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-636dee9a] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:21:27.443Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:22:34.211Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-22544c6d] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:22:34.211Z"}
+2019-07-16T11:22:34.211Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-22544c6d] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:22:34.211Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:28:47.042Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-5b93ff99] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:28:47.042Z"}
+2019-07-16T11:28:47.042Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-5b93ff99] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:28:47.042Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:31:32.010Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-6e264a10] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:31:32.010Z"}
+2019-07-16T11:31:32.010Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-6e264a10] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:31:32.010Z"}
+============= START : Vendor Change PO Status ===========
+{"Material":[{"material_name":"Drug12"}],"created_by":"Manufacture1@gmail.com","date":1563258651566,"docType":"manufacture_po","expectedDate":"10/12/2020","po_no":"manufacture1-1","timeline":[{"date":1563258651566,"msg":"Purchase Order Created","updated_by":"Manufacture1@gmail.com"}],"totalAmt":"2100","tx_ids":[{"date":1563258651855,"id":"e631613116598b39992675baaceb003defb910f9816935ff18fdf698f071ccb9"}],"vendor_id":"Vendor1@gmail.com"}
+end of data
+2019-07-16T11:35:54.012Z [31merror[39m [contracts-spi/chaincodefromcontract.js]           [31merror[39m: [commonchannel-49093283] TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object. {"timestamp":"2019-07-16T11:35:54.012Z"}
+2019-07-16T11:35:54.013Z [31merror[39m [lib/handler.js]                                   [31merror[39m: [commonchannel-49093283] Calling chaincode Invoke() returned error response [TypeError: First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.]. Sending ERROR message back to peer {"timestamp":"2019-07-16T11:35:54.013Z"}
