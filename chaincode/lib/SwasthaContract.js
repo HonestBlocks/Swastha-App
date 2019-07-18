@@ -109,8 +109,9 @@ class SwasthaContract extends Contract {
      */
 
      async vendor_change_po_status(ctx, po_no, vendor_id, status) {
+        console.log("!@#!@#!#@!@#!@#!@#!@#")
         console.info('============= START : Vendor Change PO Status ===========');
-        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"vendor_id": {"$eq": "${vendor_id}"}},{"po_no": {"$eq": "${po_no}"}}]}`);
+        const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "manufacture_po"},{"vendor_id": {"$eq": "${vendor_id}"}},{"po_no": {"$eq": "${po_no}"}}]}}`);
         const allResults = [];
         while (true) {
             const res = await iterator.next();
@@ -126,18 +127,19 @@ class SwasthaContract extends Contract {
                     console.log(err);
                     Record = res.value.value.toString('utf8');
                 }
+                console.log(Record);
                 allResults.push(Record);
             }
             if (res.done) {
                 console.log('end of data');
                 await iterator.close();
                 let updatedPO = {}
-                for(var i=0; i <= allResults.length; i++) {
-                    updatedPO = JSON.parse(JSON.stringify(allResults[0]));
-                    updatedPO.timeline.push(JSON.parse(status));
-                    await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(updatedPO))));
-                }
+                console.log(allResults, typeof(allResults[0]));
+                updatedPO = JSON.parse(JSON.stringify(allResults[0]));
 
+                updatedPO.timeline.push(JSON.parse(status));
+                console.log(updatedPO)
+                await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(updatedPO))));
                 return JSON.stringify(updatedPO);
             }
         }  
@@ -154,7 +156,8 @@ class SwasthaContract extends Contract {
         console.info('============= START : Manufacture Generate PO ===========');
         let newPayload = JSON.parse(payload);
         await ctx.stub.putState(newPayload.po_no, Buffer.from(JSON.parse(JSON.stringify(payload))));
-        return payload;
+        console.log(payload);
+        return JSON.stringify(payload);
     }
 
     /**
@@ -423,6 +426,7 @@ class SwasthaContract extends Contract {
      */
 
     async manufacture_do_boxing(ctx, created_by, batch_no, box_no, newOwner) {
+        console.log('Herer'+ created_by);
         console.info('============= START : Manifacture Do Packaging of Product ===========');
         const iterator = await ctx.stub.getQueryResult(`{"selector": {"$and": [{"docType": "product"},{"created_by": {"$eq": "${created_by}"}},{"batch_no": {"$eq": "${batch_no}"}}]}}`);
         const allResults = [];
@@ -448,13 +452,16 @@ class SwasthaContract extends Contract {
             if (res.done) {
                 console.log('end of data');
                 await iterator.close();
-                // TODO: Looping Logic -> Acc to batch no
-                let newPO = JSON.parse(JSON.stringify(allResults));
-                newPO.boxid = box_no;
-                newPO.currentOwner = newOwner;
-                newOwner.ownerchain.push(JSON.parse(JSON.stringify({"owner" : newOwner, "date" : Date.now()})));
-                await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(newPO))));
-                return JSON.stringify(newPO);
+                let res = []
+                for(var i=0; i <= allResults.length; i++) {
+                    let newPO = JSON.parse(JSON.stringify(allResults[i]));
+                    newPO.boxid = box_no;
+                    newPO.currentOwner = newOwner;
+                    newOwner.ownerchain.push(JSON.parse(JSON.stringify({"owner" : newOwner, "date" : Date.now()})));
+                    res.push(JSON.parse(newPO));
+                    await ctx.stub.putState(po_no, Buffer.from(JSON.parse(JSON.stringify(newPO))));
+                }
+                return JSON.stringify(res);
             }
         }
     }

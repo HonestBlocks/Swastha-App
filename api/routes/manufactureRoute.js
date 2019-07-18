@@ -4,7 +4,7 @@ let _ = require('lodash');
 
 let manufactureInvoke = require('../blockchain_network/Manufacture/invoke');
 let manufactureQuery = require("../blockchain_network/Manufacture/query");
-
+let jwt = require('jsonwebtoken')
 
 Router.post('/manufacture_generate_po', (req, res) => {
     let manufacture_id = req.id;
@@ -21,23 +21,47 @@ Router.post('/manufacture_generate_po', (req, res) => {
     });
 });
 
-Router.post('/create_product', (req,res) => {
+
+// To be corrected
+Router.post('/packaging_by_manufacture', (req,res) => {
     let manufacture_id = req.id;
-    let body = _.pick(req.body, ['product_name', 'product_description', 'Material', 'mftDate', 'ExpiryDate', 'serial_no', 'batch_no'])
-    body['created_by'] = manufacture_id
-    body['timeline'] = []
-    body.timeline.push({msg : "Product Created", date : Date.now(), updated_by : manufacture_id});
-    body['created_at'] = Date.now()
-    body['token'] = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    console.log(body) 
-    manufactureInvoke.manufacture_create_product(body, manufacture_id).then((result) => {
+    let body = _.pick(req.body, ['batch_no', 'box_no', 'new_owner']);
+    manufactureInvoke.manufacture_do_boxing(manufacture_id, body).then(result => {
         res.status(200).json({msg:result}).end();
     }).catch(err => {
         res.status(500).json({msg:err}).end();
     });
-    
 });
 
+
+// ***
+Router.post('/quality_check/:po_no', (req, res) => {
+    let po_no = req.params.po_no;
+    let manufacture_id =  req.id;
+    let qualityCheck = req.body.qualityCheck;
+    console.log(po_no, qualityCheck)
+    manufactureQuery.manufacture_do_qc(manufacture_id, qualityCheck ,po_no).then((result) => {
+        console.log("completed");
+        res.status(200).json({msg:result}).end();
+    }).catch( (err) => {
+        res.status(500).json({msg:err}).end();
+    })
+})
+
+
+// **** - to be tested
+Router.post('/goods_recv_status/:po_no', (req, res) => {
+    let po_no = req.params.po_no;
+    let manufacture_id =  req.id;
+    let grn_status = req.body.grn_status;
+    console.log(po_no, grn_status)
+    manufactureQuery.manufacture_grn(manufacture_id,po_no, grn_status).then((result) => {
+        console.log("completed");
+        res.status(200).json({msg:result}).end();
+    }).catch( (err) => {
+        res.status(500).json({msg:err}).end();
+    })
+})
 
 Router.get('/get_all_po', (req, res) => {
     let manufacture_id = req.id;
@@ -61,44 +85,37 @@ Router.get('/get_po/:po_no', (req, res) => {
     })
 })
 
+// token => jwttoken
+Router.post('/create_product', (req,res) => {
+    let manufacture_id = req.id;
+    let body = _.pick(req.body, ['product_name', 'product_description', 'Material', 'mftDate', 'ExpiryDate', 'serial_no', 'batch_no'])
+    body['created_by'] = manufacture_id
+    body['timeline'] = []
+    body['docType'] = 'product'
+    body.timeline.push({msg : "Product Created", date : Date.now(), updated_by : manufacture_id});
+    body['created_at'] = Date.now()
 
-// ***
-Router.get('/quality_check/:po_no', (req, res) => {
-    let po_no = req.params.po_no;
-    let manufacture_id =  req.id;
-    let qualityCheck = JSON.stringify(req.body.qualityCheck);
-    console.log(po_no, qualityCheck)
-    manufactureQuery.manufacture_do_qc(manufacture_id, qualityCheck ,po_no).then((result) => {
-        console.log("completed");
+    // Jwt token which keeps the record of a paricular product 
+    let record = []
+    record.push({'type': "Manufacture", 'ID' : manufacture_id, 'date':Date.now(), 'product_name': body['product_name'], 'batch_no':body['batch_no'] })
+    body['token'] = jwt.sign({record : record},process.env.JSON_SECRET);
+    
+    console.log(body) 
+    manufactureInvoke.manufacture_create_product(body, manufacture_id).then((result) => {
+        console.log('Result' , result)
         res.status(200).json({msg:result}).end();
-    }).catch( (err) => {
+    }).catch(err => {
         res.status(500).json({msg:err}).end();
-    })
-})
-
-// **** - to be tested
-Router.get('/goods_recv_status/:po_no', (req, res) => {
-    let po_no = req.params.po_no;
-    let manufacture_id =  req.id;
-    let grn_status = JSON.stringify(req.body.grn_status);
-    console.log(po_no, grn_status)
-    manufactureQuery.manufacture_do_qc(manufacture_id,po_no, grn_status).then((result) => {
-        console.log("completed");
-        res.status(200).json({msg:result}).end();
-    }).catch( (err) => {
-        res.status(500).json({msg:err}).end();
-
-    })
-})
-
-// TODO: Create Product
-
+    });
+});
 
 
 Router.get('/view_products', (req, res) => {
     let manufacture_id = req.id;
+    console.log(manufacture_id);
     manufactureQuery.manufacture_view_product(manufacture_id).then((result) => {
         console.log('HEYY')
+
         res.status(200).json({msg : result}).end();
     }).catch(err => {
         res.status(500).json({msg : err}).end();
